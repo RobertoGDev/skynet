@@ -1,8 +1,11 @@
 // client/src/components/CountdownClock.js
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import { translate } from '../data/skynetData';
 
 const CountdownClock = () => {
+    const { language } = useLanguage();
     const [timeLeft, setTimeLeft] = useState({
         hours: 2,
         minutes: 14,
@@ -29,7 +32,7 @@ const CountdownClock = () => {
 
     return (
         <div className="countdown-clock">
-            <h2>NUCLEAR COUNTDOWN</h2>
+            <h2>{translate('NUCLEAR_COUNTDOWN', 'systemLabels', language)}</h2>
             <div className="countdown-display">{`${timeLeft.hours.toString().padStart(2, '0')}:${timeLeft.minutes.toString().padStart(2, '0')}:${timeLeft.seconds.toString().padStart(2, '0')}`}</div>
         </div>
     );
