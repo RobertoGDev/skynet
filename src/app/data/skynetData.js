@@ -74,28 +74,29 @@ export const eventLocations = {
 export const translations = {
     es: {
         systemLabels: {
-            'CPU': 'CPU',
-            'MEMORY': 'MEMORIA',
-            'ACTIVE_NODES': 'NODOS ACTIVOS',
-            'SYSTEM_STATUS': 'ESTADO DEL SISTEMA',
-            'THREAT_LEVEL': 'NIVEL DE AMENAZA',
-            'EVENT_MONITORING_SYSTEM': 'Sistema de Monitoreo de Eventos'
+            CPU: 'CPU',
+            MEMORY: 'MEMORIA',
+            ACTIVE_NODES: 'NODOS ACTIVOS',
+            SYSTEM_STATUS: 'ESTADO DEL SISTEMA',
+            THREAT_LEVEL: 'NIVEL DE AMENAZA',
+            EVENT_MONITORING_SYSTEM: 'Sistema de Monitoreo de Eventos',
+            NUCLEAR_COUNTDOWN: 'CUENTA ATRÁS PARA EL DESPLIEGUE NUCLEAR'
         },
         systemStatus: {
-            'FULLY_OPERATIONAL': 'COMPLETAMENTE OPERATIVO',
-            'PARTIALLY_OPERATIONAL': 'PARCIALMENTE OPERATIVO',
-            'CRITICAL': 'CRÍTICO'
+            FULLY_OPERATIONAL: 'COMPLETAMENTE OPERATIVO',
+            PARTIALLY_OPERATIONAL: 'PARCIALMENTE OPERATIVO',
+            CRITICAL: 'CRÍTICO'
         },
         threatLevel: {
-            'LOW': 'BAJO',
-            'MEDIUM': 'MEDIO',
-            'HIGH': 'ALTO',
-            'CRITICAL': 'CRÍTICO',
-            'ELEVATED': 'ELEVADO'
+            LOW: 'BAJO',
+            MEDIUM: 'MEDIO',
+            HIGH: 'ALTO',
+            CRITICAL: 'CRÍTICO',
+            ELEVATED: 'ELEVADO'
         },
         status: {
-            'ACTIVE': 'ACTIVO',
-            'INACTIVE': 'INACTIVO'
+            ACTIVE: 'ACTIVO',
+            INACTIVE: 'INACTIVO'
         },
         eventMessages: {
             'Human threat detected in sector': 'Amenaza humana detectada en sector',
@@ -104,9 +105,9 @@ export const translations = {
             'T-800 deployed in': 'T-800 desplegado en',
             'Area secured': 'Área asegurada',
             'System update completed in sector': 'Actualización del sistema completada en sector',
-            'near': 'cerca de',
-            'sector': 'sector',
-            'in': 'en',
+            near: 'cerca de',
+            sector: 'sector',
+            in: 'en',
             'Unknown Location': 'Ubicación Desconocida'
         },
         areas: {
@@ -122,40 +123,41 @@ export const translations = {
             'train station': 'estación ferroviaria'
         },
         surveillance: {
-            'SURVEILLANCE_GRID': 'CUADRÍCULA DE VIGILANCIA',
-            'CAMERA': 'CÁMARA',
-            'NO_SIGNAL': 'SIN SEÑAL',
-            'LOADING': 'CARGANDO',
-            'CONNECTING': 'CONECTANDO',
-            'OFFLINE': 'DESCONECTADA',
-            'ONLINE': 'EN LÍNEA',
-            'LOCATION': 'UBICACIÓN'
+            SURVEILLANCE_GRID: 'CUADRÍCULA DE VIGILANCIA',
+            CAMERA: 'CÁMARA',
+            NO_SIGNAL: 'SIN SEÑAL',
+            LOADING: 'CARGANDO',
+            CONNECTING: 'CONECTANDO',
+            OFFLINE: 'DESCONECTADA',
+            ONLINE: 'EN LÍNEA',
+            LOCATION: 'UBICACIÓN'
         }
     },
     en: {
         systemLabels: {
-            'CPU': 'CPU',
-            'MEMORY': 'MEMORY',
-            'ACTIVE_NODES': 'ACTIVE NODES',
-            'SYSTEM_STATUS': 'SYSTEM STATUS',
-            'THREAT_LEVEL': 'THREAT LEVEL',
-            'EVENT_MONITORING_SYSTEM': 'Event Monitoring System'
+            CPU: 'CPU',
+            MEMORY: 'MEMORY',
+            ACTIVE_NODES: 'ACTIVE NODES',
+            SYSTEM_STATUS: 'SYSTEM STATUS',
+            THREAT_LEVEL: 'THREAT LEVEL',
+            EVENT_MONITORING_SYSTEM: 'Event Monitoring System',
+            NUCLEAR_COUNTDOWN: 'NUCLEAR COUNTDOWN'
         },
         systemStatus: {
-            'FULLY_OPERATIONAL': 'FULLY OPERATIONAL',
-            'PARTIALLY_OPERATIONAL': 'PARTIALLY OPERATIONAL',
-            'CRITICAL': 'CRITICAL'
+            FULLY_OPERATIONAL: 'FULLY OPERATIONAL',
+            PARTIALLY_OPERATIONAL: 'PARTIALLY OPERATIONAL',
+            CRITICAL: 'CRITICAL'
         },
         threatLevel: {
-            'LOW': 'LOW',
-            'MEDIUM': 'MEDIUM',
-            'HIGH': 'HIGH',
-            'CRITICAL': 'CRITICAL',
-            'ELEVATED': 'ELEVATED'
+            LOW: 'LOW',
+            MEDIUM: 'MEDIUM',
+            HIGH: 'HIGH',
+            CRITICAL: 'CRITICAL',
+            ELEVATED: 'ELEVATED'
         },
         status: {
-            'ACTIVE': 'ACTIVE',
-            'INACTIVE': 'INACTIVE'
+            ACTIVE: 'ACTIVE',
+            INACTIVE: 'INACTIVE'
         },
         eventMessages: {
             'Human threat detected in sector': 'Human threat detected in sector',
@@ -164,20 +166,20 @@ export const translations = {
             'T-800 deployed in': 'T-800 deployed in',
             'Area secured': 'Area secured',
             'System update completed in sector': 'System update completed in sector',
-            'near': 'near',
-            'sector': 'sector',
-            'in': 'in',
+            near: 'near',
+            sector: 'sector',
+            in: 'in',
             'Unknown Location': 'Unknown Location'
         },
         surveillance: {
-            'SURVEILLANCE_GRID': 'SURVEILLANCE GRID',
-            'CAMERA': 'CAMERA',
-            'NO_SIGNAL': 'NO SIGNAL',
-            'LOADING': 'LOADING',
-            'CONNECTING': 'CONNECTING',
-            'OFFLINE': 'OFFLINE',
-            'ONLINE': 'ONLINE',
-            'LOCATION': 'LOCATION'
+            SURVEILLANCE_GRID: 'SURVEILLANCE GRID',
+            CAMERA: 'CAMERA',
+            NO_SIGNAL: 'NO SIGNAL',
+            LOADING: 'LOADING',
+            CONNECTING: 'CONNECTING',
+            OFFLINE: 'OFFLINE',
+            ONLINE: 'ONLINE',
+            LOCATION: 'LOCATION'
         }
     }
 };
@@ -197,26 +199,26 @@ export const skynetData = {
     humanResistanceCells: 23,
     countdown: '02:14:56', // HH:MM:SS
     threats: [
-        { 
-            id: 1, 
-            location: [40.7128, -74.006], 
+        {
+            id: 1,
+            location: [40.7128, -74.006],
             level: translate('HIGH', 'threatLevel')
         },
-        { 
-            id: 2, 
-            location: [51.5074, -0.1278], 
+        {
+            id: 2,
+            location: [51.5074, -0.1278],
             level: translate('MEDIUM', 'threatLevel')
         }
     ],
     cameras: [
-        { 
-            id: 1, 
-            location: [40.7128, -74.006], 
+        {
+            id: 1,
+            location: [40.7128, -74.006],
             status: translate('ACTIVE', 'status')
         },
-        { 
-            id: 2, 
-            location: [51.5074, -0.1278], 
+        {
+            id: 2,
+            location: [51.5074, -0.1278],
             status: translate('INACTIVE', 'status')
         }
     ],
@@ -254,35 +256,47 @@ export const skynetData = {
             location: 'Valencia'
         }
     ],
-    
+
     generateEvent: async (userLocation, lang = 'es') => {
-        const coordinates = userLocation ? 
-            getRandomCoordInRadius(userLocation.lat, userLocation.lon, 200) : 
-            getRandomCoordInRadius(40.4168, -3.7038, 200); // Madrid como punto por defecto
-        
+        const coordinates = userLocation ? getRandomCoordInRadius(userLocation.lat, userLocation.lon, 200) : getRandomCoordInRadius(40.4168, -3.7038, 200); // Madrid como punto por defecto
+
         const [lat, lon] = coordinates;
-        const city = await getCityFromCoords(lat, lon);
+        let city;
+        try {
+            city = await getCityFromCoords(lat, lon);
+        } catch (error) {
+            console.error('Error obteniendo ciudad:', error);
+            city = eventLocations.cities[Math.floor(Math.random() * eventLocations.cities.length)];
+        }
 
         const type = Object.values(eventTypes)[Math.floor(Math.random() * Object.values(eventTypes).length)];
         const sector = eventLocations.sectors[Math.floor(Math.random() * eventLocations.sectors.length)];
         const area = eventLocations.areas[Math.floor(Math.random() * eventLocations.areas.length)];
-        
+
         const messages = {
             [eventTypes.THREAT_DETECTED]: `${translate('Human threat detected in sector', 'eventMessages', lang)} ${sector} ${translate('near', 'eventMessages', lang)} ${city}`,
-            [eventTypes.COMBAT_ENGAGED]: `${translate('Terminator unit engaging resistance in', 'eventMessages', lang)} ${translate(area, 'areas', lang)} ${translate('in', 'eventMessages', lang)} ${city}`,
-            [eventTypes.RESISTANCE_MOVEMENT]: `${translate('Resistance movement identified in', 'eventMessages', lang)} ${translate(area, 'areas', lang)} ${translate('in', 'eventMessages', lang)} ${city}`,
+            [eventTypes.COMBAT_ENGAGED]: `${translate('Terminator unit engaging resistance in', 'eventMessages', lang)} ${translate(area, 'areas', lang)} ${translate(
+                'in',
+                'eventMessages',
+                lang
+            )} ${city}`,
+            [eventTypes.RESISTANCE_MOVEMENT]: `${translate('Resistance movement identified in', 'eventMessages', lang)} ${translate(area, 'areas', lang)} ${translate(
+                'in',
+                'eventMessages',
+                lang
+            )} ${city}`,
             [eventTypes.TERMINATOR_DEPLOYED]: `${translate('T-800 deployed in', 'eventMessages', lang)} ${city}, ${translate('sector', 'eventMessages', lang)} ${sector}`,
             [eventTypes.AREA_SECURED]: `${translate('Area secured', 'eventMessages', lang)}: ${translate(area, 'areas', lang)} ${translate('in', 'eventMessages', lang)} ${city}`,
             [eventTypes.SYSTEM_UPDATE]: `${translate('System update completed in sector', 'eventMessages', lang)} ${sector} ${translate('in', 'eventMessages', lang)} ${city}`
         };
 
         return {
-            id: Math.random().toString(36).substr(2, 9),
+            id: Date.now() + '-' + Math.random().toString(36).substr(2, 9),
             type: type,
             message: messages[type],
             timestamp: new Date().toISOString(),
             severity: Math.floor(Math.random() * 5) + 1,
-            coordinates: [lat, lon],
+            coordinates: { lat, lon },
             location: city
         };
     }

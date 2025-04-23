@@ -11,18 +11,22 @@ export default function EventLog() {
 
     // Función para calcular distancia entre dos puntos (Haversine)
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
-        const R = 6371; // Radio de la Tierra en km
-        const dLat = (lat2 - lat1) * Math.PI / 180;
-        const dLon = (lon2 - lon1) * Math.PI / 180;
-        const a = 
-            Math.sin(dLat/2) * Math.sin(dLat/2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-            Math.sin(dLon/2) * Math.sin(dLon/2);
-        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        // Validar que todos los parámetros sean números válidos
+        if (!lat1 || !lon1 || !lat2 || !lon2 || isNaN(lat1) || isNaN(lon1) || isNaN(lat2) || isNaN(lon2)) {
+            return 0;
+        }
+
+        const R = 6371;
+        const dLat = ((lat2 - lat1) * Math.PI) / 180;
+        const dLon = ((lon2 - lon1) * Math.PI) / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
     };
 
     useEffect(() => {
+        let interval;
+
         // Obtener ubicación del usuario
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
@@ -32,31 +36,74 @@ export default function EventLog() {
                         lon: position.coords.longitude
                     };
                     setUserLocation(location);
+
+                    // Genera evento inicial solo cuando tenemos la ubicación
+                    const getInitialEvent = async () => {
+                        try {
+                            const initialEvent = await skynetData.generateEvent(location, language);
+                            initialEvent.id = Date.now();
+                            setEvents([initialEvent]);
+                        } catch (error) {
+                            console.error('Error generando evento inicial:', error);
+                        }
+                    };
+
+                    getInitialEvent();
+
+                    // Inicia el intervalo solo cuando tenemos la ubicación
+                    interval = setInterval(async () => {
+                        try {
+                            const newEvent = await skynetData.generateEvent(location, language);
+                            newEvent.id = Date.now() + Math.random();
+
+                            setEvents((prevEvents) => {
+                                return [newEvent, ...prevEvents].slice(0, 10);
+                            });
+                        } catch (error) {
+                            console.error('Error generando nuevo evento:', error);
+                        }
+                    }, Math.random() * 4000 + 3000);
                 },
                 (error) => {
-                    console.error("Error obteniendo ubicación:", error);
-                    setUserLocation({ lat: 40.4168, lon: -3.7038 }); // Madrid
+                    console.error('Error obteniendo ubicación:', error);
+                    const defaultLocation = { lat: 40.4168, lon: -3.7038 }; // Madrid
+                    setUserLocation(defaultLocation);
+
+                    // Usar ubicación por defecto si hay error
+                    const getInitialEvent = async () => {
+                        try {
+                            const initialEvent = await skynetData.generateEvent(defaultLocation, language);
+                            initialEvent.id = Date.now();
+                            setEvents([initialEvent]);
+                        } catch (error) {
+                            console.error('Error generando evento inicial:', error);
+                        }
+                    };
+
+                    getInitialEvent();
+
+                    interval = setInterval(async () => {
+                        try {
+                            const newEvent = await skynetData.generateEvent(defaultLocation, language);
+                            newEvent.id = Date.now() + Math.random();
+
+                            setEvents((prevEvents) => {
+                                return [newEvent, ...prevEvents].slice(0, 10);
+                            });
+                        } catch (error) {
+                            console.error('Error generando nuevo evento:', error);
+                        }
+                    }, Math.random() * 4000 + 3000);
                 }
             );
         }
 
-        // Genera evento inicial cerca de la ubicación del usuario
-        const initialEvent = skynetData.generateEvent(userLocation, language);
-        initialEvent.id = Date.now(); // Aseguramos ID único
-        setEvents([initialEvent]);
-
-        // Genera nuevos eventos cada 3-7 segundos
-        const interval = setInterval(() => {
-            setEvents(prevEvents => {
-                const newEvent = skynetData.generateEvent(userLocation, language);
-                newEvent.id = Date.now() + Math.random(); // ID único usando timestamp + random
-                const newEvents = [newEvent, ...prevEvents].slice(0, 10);
-                return newEvents;
-            });
-        }, Math.random() * 4000 + 3000);
-
-        return () => clearInterval(interval);
-    }, [userLocation, language]);
+        return () => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        };
+    }, [language]); // Solo depende del idioma
 
     const getSeverityColor = (severity, distance) => {
         // Ajusta el color según la severidad y la distancia
@@ -67,42 +114,30 @@ export default function EventLog() {
             4: 'text-red-500',
             5: 'text-red-700'
         };
-        
+
         // Si está a más de 100km, reduce la intensidad del color
         if (distance > 100) {
             return 'text-gray-500';
         }
-        
+
         return baseColors[severity] || 'text-white';
     };
 
     return (
         <div className="border-2 border-red-500 p-4 h-[400px] overflow-hidden">
-            <h2 className="text-xl mb-2">
-                {translate('EVENT_MONITORING_SYSTEM', 'systemLabels', language)}
-            </h2>
+            <h2 className="text-xl mb-2">{translate('EVENT_MONITORING_SYSTEM', 'systemLabels', language)}</h2>
             <div className="h-full overflow-y-auto font-sans text-sm">
-                {events.map(event => {
-                    const distance = userLocation ? 
-                        calculateDistance(
-                            userLocation.lat, 
-                            userLocation.lon, 
-                            event.coordinates?.lat, 
-                            event.coordinates?.lon
-                        ) : 0;
+                {events.map((event) => {
+                    // Validar que event.timestamp sea válido
+                    const timestamp = event.timestamp ? new Date(event.timestamp) : new Date();
+                    const isValidDate = timestamp instanceof Date && !isNaN(timestamp);
+
+                    const distance = userLocation && event.coordinates ? calculateDistance(userLocation.lat, userLocation.lon, event.coordinates.lat, event.coordinates.lon) : 0;
 
                     return (
-                        <div 
-                            key={event.id || `event-${Date.now()}-${Math.random()}`}
-                            className={`mb-2 ${getSeverityColor(event.severity, distance)} transition-opacity`}
-                        >
-                            <span className="text-green-500">
-                                [{new Date(event.timestamp).toLocaleTimeString()}]
-                            </span>{' '}
-                            <span className="text-blue-400">
-                                [{Math.round(distance)}km]
-                            </span>{' '}
-                            {event.message}
+                        <div key={event.id || `event-${Date.now()}-${Math.random()}`} className={`mb-2 ${getSeverityColor(event.severity, distance)} transition-opacity`}>
+                            <span className="text-green-500">[{isValidDate ? timestamp.toLocaleTimeString() : 'Invalid Time'}]</span>{' '}
+                            <span className="text-blue-400">[{Number.isFinite(distance) ? Math.round(distance) : 0}km]</span> {event.message}
                         </div>
                     );
                 })}
