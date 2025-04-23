@@ -30,6 +30,7 @@ export default function Home() {
         <div className="min-h-screen bg-black text-red-500 p-4">
             <header className="text-center mb-8">
                 <h1 className="text-4xl font-bold">SKYNET DEFENSE SYSTEM</h1>
+                <CountdownClock />
                 <SystemStatus />
             </header>
 
@@ -37,7 +38,6 @@ export default function Home() {
                 <EventLog />
                 <GlobalThreatMap userLocation={userLocation} />
                 <SurveillanceGrid />
-                <CountdownClock />
                 <TerminatorTracker userLocation={userLocation} />
             </div>
         </div>
