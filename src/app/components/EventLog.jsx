@@ -81,7 +81,7 @@ export default function EventLog() {
             <h2 className="text-xl mb-2">
                 {translate('EVENT_MONITORING_SYSTEM', 'systemLabels', language)}
             </h2>
-            <div className="h-full overflow-y-auto font-mono text-sm">
+            <div className="h-full overflow-y-auto font-sans text-sm">
                 {events.map(event => {
                     const distance = userLocation ? 
                         calculateDistance(

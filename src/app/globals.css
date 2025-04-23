@@ -1,15 +1,33 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Modern Vision';
+  src: url('/fonts/modern-vision.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Terminator';
+  src: url('/fonts/terminator real nfi.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-modern: 'Modern Vision', sans-serif;
+  --font-terminator: 'Terminator', sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-modern);
+  --font-heading: var(--font-terminator);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +40,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-modern);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-terminator);
+  letter-spacing: 1px;
 }
