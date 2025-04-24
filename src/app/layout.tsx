@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { LanguageProvider } from './context/LanguageContext';
+import { AuthProvider } from './components/AuthProvider';
 import LanguageSelector from './components/LanguageSelector';
 import 'leaflet/dist/leaflet.css';
 import './globals.css';
@@ -17,15 +18,17 @@ export default function RootLayout({
     return (
         <html lang="es">
             <body suppressHydrationWarning={true} className="antialiased bg-black text-white">
-                <LanguageProvider>
-                    <nav className="p-4 flex justify-between items-center">
-                        <h1 className="text-red-500 text-2xl font-bold">SKYNET</h1>
-                        <div className="flex items-center space-x-4">
-                            <LanguageSelector />
-                        </div>
-                    </nav>
-                    {children}
-                </LanguageProvider>
+                <AuthProvider>
+                    <LanguageProvider>
+                        <nav className="p-4 flex justify-between items-center">
+                            <h1 className="text-red-500 text-2xl font-bold">CYBERDINE SYSTEMS</h1>
+                            <div className="flex items-center space-x-4">
+                                <LanguageSelector />
+                            </div>
+                        </nav>
+                        {children}
+                    </LanguageProvider>
+                </AuthProvider>
             </body>
         </html>
     );
