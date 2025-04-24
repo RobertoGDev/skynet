@@ -63,7 +63,7 @@ export default function SystemStatus() {
     };
 
     return (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 border-2 border-red-500">
+        <div className="grid grid-cols-1 gap-4 p-4 border-2 border-red-500">
             <div className="text-center">
                 <div className="text-xs text-gray-400">{translate('CPU', 'systemLabels', language)}</div>
                 <div className={`text-xl ${getStatusColor(status.cpuLoad)}`}>{status.cpuLoad}%</div>

@@ -20,7 +20,7 @@ export default function RootLayout({
             <body suppressHydrationWarning={true} className="antialiased bg-black text-white">
                 <AuthProvider>
                     <LanguageProvider>
-                        <nav className="p-4 flex justify-between items-center">
+                        <nav className="p-4 flex flex-col md:flex-row justify-between items-center">
                             <h1 className="text-red-500 text-2xl font-bold">CYBERDINE SYSTEMS</h1>
                             <div className="flex items-center space-x-4">
                                 <LanguageSelector />
