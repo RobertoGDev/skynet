@@ -33,7 +33,7 @@ const CountdownClock = () => {
     return (
         <div className="countdown-clock">
             <h2>{translate('NUCLEAR_COUNTDOWN', 'systemLabels', language)}</h2>
-            <div className="countdown-display">{`${timeLeft.hours.toString().padStart(2, '0')}:${timeLeft.minutes.toString().padStart(2, '0')}:${timeLeft.seconds.toString().padStart(2, '0')}`}</div>
+            <div className="countdown-display text-3xl">{`${timeLeft.hours.toString().padStart(2, '0')}:${timeLeft.minutes.toString().padStart(2, '0')}:${timeLeft.seconds.toString().padStart(2, '0')}`}</div>
         </div>
     );
 };
