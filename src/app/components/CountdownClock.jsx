@@ -19,8 +19,8 @@ const CountdownClock = () => {
                 const { days, hours, minutes, seconds } = prev;
 
                 if (seconds > 0) return { ...prev, seconds: seconds - 1 };
-                if (minutes > 0) return { minutes: minutes - 1, seconds: 59, hours };
-                if (hours > 0) return { hours: hours - 1, minutes: 59, seconds: 59 };
+                if (minutes > 0) return { days, hours, minutes: minutes - 1, seconds: 59 };
+                if (hours > 0) return { days, hours: hours - 1, minutes: 59, seconds: 59 };
                 if (days > 0) return { days: days - 1, hours: 23, minutes: 59, seconds: 59 };
 
                 // Countdown finished - nuclear apocalypse
