@@ -74,9 +74,9 @@ export default function GlobalThreatMap({ userLocation }) {
     };
 
     return (
-        <div className="space-y-4">
+        <div className="h-full flex flex-col space-y-4">
             {/* Mapa mundial estilizado */}
-            <div className="relative bg-gray-900 border border-red-500/30 rounded overflow-hidden" style={{height: '180px'}}>
+            <div className="flex-shrink-0 relative bg-gray-900 border border-red-500/30 rounded overflow-hidden" style={{height: '180px'}}>
                 {/* Fondo del mapa */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-gray-900 to-black">
                     {/* Líneas de grid */}
@@ -133,10 +133,10 @@ export default function GlobalThreatMap({ userLocation }) {
                 </div>
             </div>
             
-            {/* Lista de amenazas */}
-            <div className="space-y-1 max-h-32 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-500">
-                {threats.slice(0, 4).map((threat) => (
-                    <div key={threat.id} className="flex items-center justify-between text-xs font-mono bg-gray-800/30 p-2 rounded border-l-2 border-red-500/50">
+            {/* Lista de amenazas - ocupa todo el espacio restante */}
+            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-500 space-y-1 pr-1">
+                {threats.map((threat) => (
+                    <div key={threat.id} className="flex items-center justify-between text-xs font-mono bg-gray-800/30 p-2 rounded border-l-2 border-red-500/50 hover:bg-gray-700/30 transition-colors">
                         <div className="flex items-center space-x-2">
                             <div className={`w-2 h-2 rounded-full ${getThreatColor(threat.level)} animate-pulse`}></div>
                             <span className="text-white">{threat.location}</span>
