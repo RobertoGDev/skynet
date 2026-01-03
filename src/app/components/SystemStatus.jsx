@@ -62,17 +62,40 @@ export default function SystemStatus() {
         return 'text-green-400';
     };
 
+    // Función para obtener el frame del terminator según el estado del sistema
+    const getTerminatorFrame = () => {
+        const frameWidth = 64;
+        const frameHeight = 64;
+
+        let frameIndex;
+        if (status.systemStatus === 'FULLY_OPERATIONAL' && status.cpuLoad < 80) {
+            frameIndex = 0; // Frame saludable
+        } else if (status.systemStatus === 'INITIALIZING' || status.cpuLoad < 90) {
+            frameIndex = 1; // Frame normal
+        } else if (status.threatLevel === 'CRITICAL' || status.cpuLoad >= 95) {
+            frameIndex = 3; // Frame dañado
+        } else {
+            frameIndex = 2; // Frame desgastado
+        }
+
+        const x = frameIndex * frameWidth;
+        const y = 0;
+
+        return {
+            backgroundImage: 'url("/images/sprite-terminators.png")',
+            backgroundPosition: `-${x}px -${y}px`,
+            backgroundSize: `${frameWidth * 4}px auto`,
+            width: '32px',
+            height: '32px',
+            imageRendering: 'pixelated'
+        };
+    };
+
     return (
         <div className="space-y-4">
             {/* Video bucle en la parte superior */}
             <div className="relative w-full bg-black rounded border border-red-500/30 overflow-hidden">
-                <video 
-                    className="w-full h-full object-cover opacity-80"
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline
-                >
+                <video className="w-full h-full object-cover opacity-80" autoPlay loop muted playsInline>
                     <source src="/videos/bucle.mp4" type="video/mp4" />
                     Tu navegador no soporta video HTML5.
                 </video>
@@ -86,36 +109,30 @@ export default function SystemStatus() {
                 <div>
                     <div className="text-xs text-gray-300 mb-2 uppercase tracking-wide">CPU</div>
                     <div className="relative h-16 bg-gray-900 rounded border border-red-500/30">
-                        <div 
+                        <div
                             className="absolute bottom-0 left-0 bg-gradient-to-t from-red-600 to-red-400 rounded transition-all duration-1000"
                             style={{
                                 width: '100%',
                                 height: `${status.cpuLoad}%`,
                                 boxShadow: '0 0 10px rgba(255, 0, 0, 0.5)'
-                            }}
-                        ></div>
+                            }}></div>
                         <div className="absolute inset-0 flex items-end justify-center pb-1">
-                            <span className={`text-sm font-bold ${getStatusColor(status.cpuLoad)}`}>
-                                {status.cpuLoad}%
-                            </span>
+                            <span className={`text-sm font-bold ${getStatusColor(status.cpuLoad)}`}>{status.cpuLoad}%</span>
                         </div>
                     </div>
                 </div>
                 <div>
                     <div className="text-xs text-gray-300 mb-2 uppercase tracking-wide">Memoria</div>
                     <div className="relative h-16 bg-gray-900 rounded border border-red-500/30">
-                        <div 
+                        <div
                             className="absolute bottom-0 left-0 bg-gradient-to-t from-blue-600 to-blue-400 rounded transition-all duration-1000"
                             style={{
                                 width: '100%',
                                 height: `${status.memoryUsage}%`,
                                 boxShadow: '0 0 10px rgba(0, 150, 255, 0.5)'
-                            }}
-                        ></div>
+                            }}></div>
                         <div className="absolute inset-0 flex items-end justify-center pb-1">
-                            <span className={`text-sm font-bold ${getStatusColor(status.memoryUsage)}`}>
-                                {status.memoryUsage}%
-                            </span>
+                            <span className={`text-sm font-bold ${getStatusColor(status.memoryUsage)}`}>{status.memoryUsage}%</span>
                         </div>
                     </div>
                 </div>
@@ -127,27 +144,42 @@ export default function SystemStatus() {
                     <span className="text-xs text-gray-400 uppercase">Nodos Activos:</span>
                     <span className="text-cyan-400 font-bold">{status.activeNodes.toLocaleString()}</span>
                 </div>
-                
+
                 <div className="flex justify-between items-center">
                     <span className="text-xs text-gray-400 uppercase">Estado del Sistema:</span>
-                    <span className={`text-sm font-bold ${getSystemStatusColor(status.systemStatus)} animate-pulse`}>
-                        {translate(status.systemStatus, 'systemStatus', language)}
-                    </span>
+                    <span className={`text-sm font-bold ${getSystemStatusColor(status.systemStatus)} animate-pulse`}>{translate(status.systemStatus, 'systemStatus', language)}</span>
                 </div>
 
                 <div className="flex justify-between items-center">
                     <span className="text-xs text-gray-400 uppercase">Nivel de Amenaza:</span>
-                    <span className={`text-sm font-bold text-red-400 animate-pulse`}>
-                        {translate(status.threatLevel, 'threatLevel', language)}
-                    </span>
+                    <span className={`text-sm font-bold text-red-400 animate-pulse`}>{translate(status.threatLevel, 'threatLevel', language)}</span>
                 </div>
             </div>
 
             {/* Indicadores visuales */}
-            <div className="flex space-x-2 justify-center mt-4">
-                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse shadow-lg shadow-yellow-500/50"></div>
-                <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
+            <div className="flex justify-between items-center mt-4">
+                <div className="flex space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full animate-pulse shadow-lg shadow-yellow-500/50"></div>
+                    <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse shadow-lg shadow-red-500/50"></div>
+                </div>
+
+                {/* Terminator decorativo que reacciona al estado */}
+                <div className="flex items-center space-x-2">
+                    <div className="text-xs text-gray-400 font-mono">UNIT-01</div>
+                    <div className="relative">
+                        <div className="bg-red-900/20 rounded border border-red-500/50 overflow-hidden relative" style={getTerminatorFrame()}>
+                            {/* Overlay de estado crítico */}
+                            {(status.threatLevel === 'CRITICAL' || status.cpuLoad >= 95) && <div className="absolute inset-0 bg-red-600/40 animate-pulse"></div>}
+
+                            {/* Efectos HUD miniaturizados */}
+                            <div className="absolute top-0 left-0 w-1 h-1 border-l border-t border-red-400 opacity-80"></div>
+                            <div className="absolute top-0 right-0 w-1 h-1 border-r border-t border-red-400 opacity-80"></div>
+                            <div className="absolute bottom-0 left-0 w-1 h-1 border-l border-b border-red-400 opacity-80"></div>
+                            <div className="absolute bottom-0 right-0 w-1 h-1 border-r border-b border-red-400 opacity-80"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

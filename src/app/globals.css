@@ -86,12 +86,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .panel {
-  background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(0, 10, 20, 0.98) 100%);
+  background: linear-gradient(135deg, rgba(0, 20, 40, 0.85) 0%, rgba(0, 10, 20, 0.20) 100%);
   border: 2px solid var(--panel-border);
   border-radius: 8px;
   box-shadow: 
-    0 0 20px rgba(255, 0, 0, 0.5),
-    inset 0 0 20px rgba(255, 0, 0, 0.1);
+    0 0 20px rgba(255, 0, 0, 0.4),
+    inset 0 0 20px rgba(255, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -110,6 +110,23 @@ h1, h2, h3, h4, h5, h6 {
 @keyframes scan {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
+}
+
+@keyframes scan-vertical {
+  0% { 
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% { 
+    top: 100%;
+    opacity: 0;
+  }
 }
 
 @keyframes blink {
@@ -151,7 +168,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .panel-header {
-  background: linear-gradient(90deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.4));
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.7), rgba(255, 0, 0, 0.3));
   color: white;
   padding: 8px 16px;
   font-family: var(--font-terminator);
@@ -160,6 +177,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 1px;
   border-bottom: 1px solid var(--skynet-red);
   text-shadow: 0 0 5px var(--skynet-red);
+  backdrop-filter: blur(4px);
 }
 
 /* Efectos de brillo para elementos activos */

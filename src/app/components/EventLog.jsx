@@ -123,6 +123,35 @@ export default function EventLog() {
         return baseColors[severity] || 'text-white';
     };
 
+    // Función para obtener el frame del terminator según la severidad
+    const getTerminatorAvatarFrame = (severity) => {
+        const frameWidth = 64;
+        const frameHeight = 64;
+
+        let frameIndex;
+        if (severity >= 4) {
+            frameIndex = 3; // Frame alarmado/dañado para alta severidad
+        } else if (severity >= 3) {
+            frameIndex = 2; // Frame desgastado
+        } else if (severity >= 2) {
+            frameIndex = 1; // Frame normal
+        } else {
+            frameIndex = 0; // Frame tranquilo
+        }
+
+        const x = frameIndex * frameWidth;
+        const y = 0;
+
+        return {
+            backgroundImage: 'url("/images/sprite-terminators.png")',
+            backgroundPosition: `-${x}px -${y}px`,
+            backgroundSize: `${frameWidth * 4}px auto`,
+            width: '20px',
+            height: '20px',
+            imageRendering: 'pixelated'
+        };
+    };
+
     return (
         <div className="h-full overflow-hidden">
             <div className="h-full overflow-y-auto font-sans text-sm space-y-2 scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-500">
@@ -134,12 +163,24 @@ export default function EventLog() {
                     const distance = userLocation && event.coordinates ? calculateDistance(userLocation.lat, userLocation.lon, event.coordinates.lat, event.coordinates.lon) : 0;
 
                     return (
-                        <div key={event.id || `event-${Date.now()}-${Math.random()}`} className={`p-2 bg-gray-800/30 border-l-2 border-red-500/50 rounded font-mono text-xs ${getSeverityColor(event.severity, distance)} transition-all hover:bg-gray-700/30`}>
+                        <div
+                            key={event.id || `event-${Date.now()}-${Math.random()}`}
+                            className={`p-2 bg-gray-800/30 border-l-2 border-red-500/50 rounded font-mono text-xs ${getSeverityColor(event.severity, distance)} transition-all hover:bg-gray-700/30`}>
                             <div className="flex items-center justify-between mb-1">
-                                <span className="text-green-400">[{isValidDate ? timestamp.toLocaleTimeString() : 'Invalid Time'}]</span>
+                                <div className="flex items-center space-x-2">
+                                    {/* Avatar Terminator */}
+                                    <div className="bg-red-900/20 rounded border border-red-500/30 overflow-hidden flex-shrink-0" style={getTerminatorAvatarFrame(event.severity)}>
+                                        {/* Mini efectos HUD */}
+                                        <div className="relative w-full h-full">
+                                            <div className="absolute top-0 left-0 w-0.5 h-0.5 border-l border-t border-red-400 opacity-60"></div>
+                                            <div className="absolute top-0 right-0 w-0.5 h-0.5 border-r border-t border-red-400 opacity-60"></div>
+                                        </div>
+                                    </div>
+                                    <span className="text-green-400">[{isValidDate ? timestamp.toLocaleTimeString() : 'Invalid Time'}]</span>
+                                </div>
                                 <span className="text-blue-400">[{Number.isFinite(distance) ? Math.round(distance) : 0}km]</span>
                             </div>
-                            <div className="text-white">{event.message}</div>
+                            <div className="text-white ml-6">{event.message}</div>
                         </div>
                     );
                 })}
