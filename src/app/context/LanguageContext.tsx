@@ -47,7 +47,7 @@ export const translations: Record<string, Record<string, string>> = {
         THREAT_MAP: 'Mapa de Amenazas',
         EVENT_LOG: 'Registro de Eventos',
         SURVEILLANCE_SYSTEM: 'Sistema de Vigilancia',
-        JUDGMENT_DAY_COUNTDOWN: 'Tiempo para Día del Juicio',
+        JUDGMENT_DAY_COUNTDOWN: 'Tiempo para Día del Juicio Final',
         OPERATIONS_MAP: 'Mapa de Operaciones',
         COPYRIGHT_FOOTER: `SKYNET DEFENSE NETWORK © ${new Date().getFullYear()}-2029 CYBERDYNE SYSTEMS`
     },
