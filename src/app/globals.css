@@ -17,10 +17,15 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #ff0000;
   --font-modern: 'Modern Vision', sans-serif;
   --font-terminator: 'Terminator', sans-serif;
+  --skynet-red: #ff0000;
+  --skynet-blue: #00ffff;
+  --skynet-green: #00ff00;
+  --panel-bg: rgba(0, 20, 40, 0.9);
+  --panel-border: #ff0000;
 }
 
 @theme inline {
@@ -30,20 +35,145 @@
   --font-heading: var(--font-terminator);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
+  background: 
+    url('/dashboard-background.jpg'),
+    radial-gradient(ellipse at center, rgba(0, 100, 200, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 0, 0, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #000014 0%, #000428 50%, #004e92 100%);
+  background-size: cover, auto, auto, auto, auto;
+  background-position: center, center, 80% 20%, 20% 80%, center;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-modern);
+  overflow-x: hidden;
+}
+
+/* Efectos de circuitos y líneas de conexión */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 L90 10 L90 90 L10 90 Z' stroke='%23ff0000' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E");
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* Superposición para mejorar la legibilidad */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-terminator);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--skynet-red);
+  text-shadow: 0 0 10px var(--skynet-red);
+}
+
+.panel {
+  background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(0, 10, 20, 0.98) 100%);
+  border: 2px solid var(--panel-border);
+  border-radius: 8px;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 0, 0.5),
+    inset 0 0 20px rgba(255, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--skynet-red), transparent);
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-track-gray-800::-webkit-scrollbar-track {
+  background: rgb(31, 41, 55);
+}
+
+.scrollbar-thumb-red-500::-webkit-scrollbar-thumb {
+  background: rgb(239, 68, 68);
+  border-radius: 4px;
+}
+
+.scrollbar-thumb-red-500::-webkit-scrollbar-thumb:hover {
+  background: rgb(220, 38, 38);
+}
+
+/* Estilos para el mapa */
+.leaflet-popup-content-wrapper {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid #ff0000 !important;
+  border-radius: 4px !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid #ff0000 !important;
+}
+
+.panel-header {
+  background: linear-gradient(90deg, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.4));
+  color: white;
+  padding: 8px 16px;
+  font-family: var(--font-terminator);
+  font-size: 14px;
+  text-transform: uppercase;
   letter-spacing: 1px;
+  border-bottom: 1px solid var(--skynet-red);
+  text-shadow: 0 0 5px var(--skynet-red);
+}
+
+/* Efectos de brillo para elementos activos */
+.glow-red {
+  box-shadow: 0 0 10px var(--skynet-red);
+  border-color: var(--skynet-red);
+}
+
+.glow-blue {
+  box-shadow: 0 0 10px var(--skynet-blue);
+  border-color: var(--skynet-blue);
+}
+
+.glow-green {
+  box-shadow: 0 0 10px var(--skynet-green);
+  border-color: var(--skynet-green);
 }

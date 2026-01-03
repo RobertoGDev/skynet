@@ -124,9 +124,8 @@ export default function EventLog() {
     };
 
     return (
-        <div className="border-2 border-red-500 p-4 h-[400px] overflow-hidden">
-            <h2 className="text-xl mb-2">{translate('EVENT_MONITORING_SYSTEM', 'systemLabels', language)}</h2>
-            <div className="h-full overflow-y-auto font-sans text-sm">
+        <div className="h-full overflow-hidden">
+            <div className="h-full overflow-y-auto font-sans text-sm space-y-2 scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-500">
                 {events.map((event) => {
                     // Validar que event.timestamp sea válido
                     const timestamp = event.timestamp ? new Date(event.timestamp) : new Date();
@@ -135,9 +134,12 @@ export default function EventLog() {
                     const distance = userLocation && event.coordinates ? calculateDistance(userLocation.lat, userLocation.lon, event.coordinates.lat, event.coordinates.lon) : 0;
 
                     return (
-                        <div key={event.id || `event-${Date.now()}-${Math.random()}`} className={`mb-2 ${getSeverityColor(event.severity, distance)} transition-opacity`}>
-                            <span className="text-green-500">[{isValidDate ? timestamp.toLocaleTimeString() : 'Invalid Time'}]</span>{' '}
-                            <span className="text-blue-400">[{Number.isFinite(distance) ? Math.round(distance) : 0}km]</span> {event.message}
+                        <div key={event.id || `event-${Date.now()}-${Math.random()}`} className={`p-2 bg-gray-800/30 border-l-2 border-red-500/50 rounded font-mono text-xs ${getSeverityColor(event.severity, distance)} transition-all hover:bg-gray-700/30`}>
+                            <div className="flex items-center justify-between mb-1">
+                                <span className="text-green-400">[{isValidDate ? timestamp.toLocaleTimeString() : 'Invalid Time'}]</span>
+                                <span className="text-blue-400">[{Number.isFinite(distance) ? Math.round(distance) : 0}km]</span>
+                            </div>
+                            <div className="text-white">{event.message}</div>
                         </div>
                     );
                 })}

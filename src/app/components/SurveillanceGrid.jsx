@@ -16,7 +16,6 @@ const Camera = ({ id, status, location }) => {
             if (retryCount < maxRetries) {
                 setLoadingState('CONNECTING');
                 timer = setTimeout(() => {
-                    // Simulamos estado aleatorio de la cámara
                     setLoadingState(Math.random() > 0.3 ? 'ONLINE' : 'NO_SIGNAL');
                 }, 2000);
             } else {
@@ -25,7 +24,6 @@ const Camera = ({ id, status, location }) => {
         };
 
         simulateConnection();
-
         return () => clearTimeout(timer);
     }, [retryCount]);
 
@@ -33,8 +31,8 @@ const Camera = ({ id, status, location }) => {
         switch (loadingState) {
             case 'CONNECTING':
                 return (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-75">
-                        <span className="text-red-500 text-sm animate-pulse">
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/90">
+                        <span className="text-yellow-500 text-xs animate-pulse">
                             {translate('CONNECTING', 'surveillance', language)}...
                         </span>
                     </div>
@@ -42,7 +40,7 @@ const Camera = ({ id, status, location }) => {
             case 'NO_SIGNAL':
                 return (
                     <div className="absolute inset-0 flex items-center justify-center bg-black">
-                        <span className="text-red-500 text-sm">
+                        <span className="text-red-500 text-xs blink">
                             {translate('NO_SIGNAL', 'surveillance', language)}
                         </span>
                     </div>
@@ -50,7 +48,7 @@ const Camera = ({ id, status, location }) => {
             case 'OFFLINE':
                 return (
                     <div className="absolute inset-0 flex items-center justify-center bg-black">
-                        <span className="text-red-500 text-sm">
+                        <span className="text-red-600 text-xs">
                             {translate('OFFLINE', 'surveillance', language)}
                         </span>
                     </div>
@@ -58,25 +56,49 @@ const Camera = ({ id, status, location }) => {
             case 'ONLINE':
                 return (
                     <div className="relative w-full h-full">
-                        <div className="absolute top-2 left-2 text-green-500 text-xs">
-                            {translate('ONLINE', 'surveillance', language)}
+                        <div className="absolute top-1 left-1 text-green-400 text-xs font-mono">
+                            ● {translate('ONLINE', 'surveillance', language)}
                         </div>
-                        <div className="w-full h-full opacity-10 bg-gradient-to-br from-gray-500 to-gray-700 animate-pulse" />
+                        <div className="absolute top-1 right-1 text-red-400 text-xs font-mono">
+                            REC
+                        </div>
+                        {/* Simulación de video feed */}
+                        <div className="w-full h-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 relative overflow-hidden">
+                            {/* Líneas de escaneo */}
+                            <div className="absolute inset-0 opacity-30" 
+                                 style={{
+                                     backgroundImage: 'linear-gradient(transparent 50%, rgba(0,255,0,0.1) 50%)',
+                                     backgroundSize: '100% 4px',
+                                     animation: 'scan 2s linear infinite'
+                                 }}>
+                            </div>
+                            {/* Ruido estático */}
+                            <div className="absolute inset-0 opacity-20 bg-static animate-pulse"></div>
+                        </div>
+                        {/* Crosshair del visor */}
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div className="w-6 h-6 border border-red-500 relative">
+                                <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-px h-4 bg-red-500"></div>
+                                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-px h-4 bg-red-500"></div>
+                                <div className="absolute -left-2 top-1/2 transform -translate-y-1/2 h-px w-4 bg-red-500"></div>
+                                <div className="absolute -right-2 top-1/2 transform -translate-y-1/2 h-px w-4 bg-red-500"></div>
+                            </div>
+                        </div>
                     </div>
                 );
         }
     };
 
     return (
-        <div className="border border-red-500 p-2 bg-black">
-            <div className="text-xs text-gray-400 mb-1">
-                {translate('CAMERA', 'surveillance', language)} {id}
+        <div className="border border-red-500/50 bg-gray-900 relative overflow-hidden">
+            <div className="text-xs text-red-400 p-1 bg-red-900/30 font-mono uppercase tracking-wide">
+                CAM-{id.toString().padStart(2, '0')}
             </div>
             <div className="relative aspect-video bg-gray-900">
                 {getStatusDisplay()}
             </div>
-            <div className="text-xs text-gray-400 mt-1">
-                {translate('LOCATION', 'surveillance', language)}: {location}
+            <div className="text-xs text-gray-400 p-1 bg-gray-800/50 font-mono">
+                {location}
             </div>
         </div>
     );
@@ -88,22 +110,19 @@ export default function SurveillanceGrid() {
     const { language } = useLanguage();
 
     useEffect(() => {
-        // Generar cámaras simuladas una sola vez al montar el componente
+        const sectors = ['ALPHA', 'BETA', 'GAMMA', 'DELTA', 'EPSILON', 'ZETA'];
         const simulatedCameras = Array.from({ length: 6 }, (_, i) => ({
             id: i + 1,
             status: 'CONNECTING',
-            location: `Sector ${String.fromCharCode(65 + i)}`
+            location: `SECTOR ${sectors[i]}`
         }));
         
         setCameras(simulatedCameras);
-    }, []); // Solo se ejecuta al montar el componente
+    }, []);
 
     return (
-        <div className="border-2 border-red-500 p-4">
-            <h2 className="text-xl mb-4 text-center text-red-500">
-                {translate('SURVEILLANCE_GRID', 'surveillance', language)}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {cameras.map(camera => (
                     <Camera 
                         key={camera.id} 
