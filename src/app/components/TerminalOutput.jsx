@@ -124,7 +124,7 @@ export default function TerminalOutput({ onInitializeSystem }) {
       `}</style>
       
       <div 
-        className="font-mono text-red-500 bg-black p-4 h-full overflow-auto whitespace-pre-wrap relative"
+        className="font-mono text-[9px] md:text-sm text-red-500 bg-black p-4 h-full overflow-auto whitespace-pre-wrap relative"
         style={{ 
           minHeight: '60vh',
           maxHeight: '80vh',

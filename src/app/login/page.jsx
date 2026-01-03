@@ -95,7 +95,7 @@ export default function LoginPage() {
       <div className="min-h-screen bg-black text-red-500 flex flex-col items-center justify-center p-4 font-sans">
           {/* Logo de Cyberdyne Systems */}
           <div className="text-center mb-8">
-              <div className="text-7xl mb-2 font-bold text-red-600 font-heading">{t('SKYNET')}</div>
+              <div className="text-4xl md:text-7xl mb-2 font-bold text-red-600 font-heading">{t('SKYNET')}</div>
               <div className="text-2xl mb-8 text-red-400">{t('MODEL_SERIES')}</div>
           </div>
 
@@ -130,7 +130,7 @@ export default function LoginPage() {
           ) : (
               <div className="w-full max-w-md">
                   <div className="text-center mb-6">
-                      <h1 className="text-2xl font-bold">{t('SECURE_ACCESS_TERMINAL')}</h1>
+                      <h1 className="text-xl md:text-2xl font-bold">{t('SECURE_ACCESS_TERMINAL')}</h1>
                       <p className="text-red-400 mt-2">{t('IDENTIFICATION_REQUIRED')}</p>
                   </div>
 
