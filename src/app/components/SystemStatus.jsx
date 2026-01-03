@@ -64,6 +64,23 @@ export default function SystemStatus() {
 
     return (
         <div className="space-y-4">
+            {/* Video bucle en la parte superior */}
+            <div className="relative w-full bg-black rounded border border-red-500/30 overflow-hidden">
+                <video 
+                    className="w-full h-full object-cover opacity-80"
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                >
+                    <source src="/videos/bucle.mp4" type="video/mp4" />
+                    Tu navegador no soporta video HTML5.
+                </video>
+                {/* Overlay con efecto Skynet */}
+                <div className="absolute inset-0 bg-red-500/10 mix-blend-multiply"></div>
+                <div className="absolute inset-0 border border-red-500/50 animate-pulse"></div>
+            </div>
+
             {/* Gráfico de barras de CPU y Memoria */}
             <div className="grid grid-cols-2 gap-4">
                 <div>
