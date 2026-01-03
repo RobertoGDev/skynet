@@ -69,12 +69,12 @@ export async function POST(req) {
     });
     
     // Finalizar el stream cuando termine el proceso
-    childProcess.on('close', (code) => {
-      if (code !== 0) {
-        writer.write(new TextEncoder().encode(`<br><span style="color:#ff2a2a; text-shadow: 0 0 5px #ff0000;">El proceso terminó con código ${code}</span><br>`));
-      }
-      writer.write(new TextEncoder().encode(`<br><span style="color:#33ff99; text-shadow: 0 0 5px #00cc66;">Sesión iniciada: ${user} - Terminal list</span><br>`));
-      writer.close();
+    childProcess.on('close', async (code) => {
+        if (code !== 0) {
+            writer.write(new TextEncoder().encode(`<br><span style="color:#ff2a2a; text-shadow: 0 0 5px #ff0000;">El proceso terminó con código ${code}</span><br>`));
+        }
+        writer.write(new TextEncoder().encode(`<br><span style="color:#33ff99; text-shadow: 0 0 5px #00cc66;">Sesión iniciada: ${user} - Terminal list</span><br>`));
+        await writer.close();
     });
     
     return new NextResponse(stream.readable, {
