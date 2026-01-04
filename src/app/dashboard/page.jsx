@@ -93,11 +93,11 @@ export default function DashboardPage() {
 
                     <div className="flex items-center text-sm">
                         <div className="mr-4 text-center">
-                            <div className="text-xs text-gray-400 uppercase tracking-wide">User ID</div>
+                            <div className="text-xs text-gray-400 uppercase tracking-wide">{t('USER_ID')}</div>
                             <div className="text-red-400 font-mono">{session.user.name}</div>
                         </div>
                         <div className="mr-4 text-center">
-                            <div className="text-xs text-gray-400 uppercase tracking-wide">Clearance</div>
+                            <div className="text-xs text-gray-400 uppercase tracking-wide">{t('CLEARANCE')}</div>
                             <div className="text-green-400 font-mono">{session.user.rank}</div>
                         </div>
                         <AudioToggleButton />
@@ -139,19 +139,19 @@ export default function DashboardPage() {
                 ) : (
                     <>
                         {/* Primera fila - Chat IA prominente */}
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6 relative z-10">
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6 relative z-10" style={{ height: '60vh' }}>
                             {/* Panel Sistema de Estado - Top Left */}
-                            <div className="panel">
+                            <div className="panel flex flex-col">
                                 <div className="panel-header">{t('SYSTEM_STATUS')}</div>
-                                <div className="p-4">
+                                <div className="p-4 flex-1 min-h-0">
                                     <SystemStatus />
                                 </div>
                             </div>
 
                             {/* Panel SKYNET AI Chat - Top Center & Right (2 columnas) */}
-                            <div className="panel glow-red lg:col-span-2">
+                            <div className="panel glow-red lg:col-span-2 flex flex-col">
                                 <div className="panel-header">{t('SKYNET_AI_INTERFACE')}</div>
-                                <div className="p-2" style={{ height: '420px' }}>
+                                <div className="p-2 flex-1 min-h-0">
                                     <SkynetAIChat />
                                 </div>
                             </div>
