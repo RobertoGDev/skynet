@@ -16,6 +16,7 @@ import EventLog from '../components/EventLog';
 import GlobalThreatMap from '../components/GlobalThreatMap';
 import SurveillanceGrid from '../components/SurveillanceGrid';
 import Map from '../components/Map';
+import SkynetAIChat from '../components/SkynetAIChat';
 
 export default function DashboardPage() {
     const { data: session, status } = useSession();
@@ -136,65 +137,85 @@ export default function DashboardPage() {
                         </div>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
-                        {/* Panel Sistema de Estado - Top Left */}
-                        <div className="panel">
-                            <div className="panel-header">{t('SYSTEM_STATUS')}</div>
-                            <div className="p-4">
-                                <SystemStatus />
+                    <>
+                        {/* Primera fila - Chat IA prominente */}
+                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6 relative z-10">
+                            {/* Panel Sistema de Estado - Top Left */}
+                            <div className="panel">
+                                <div className="panel-header">{t('SYSTEM_STATUS')}</div>
+                                <div className="p-4">
+                                    <SystemStatus />
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Panel Rastreador de Terminators - Top Center */}
-                        <div className="panel glow-red">
-                            <div className="panel-header">{t('TERMINATOR_TRACKER')}</div>
-                            <div className="p-4">
-                                <TerminatorTracker />
-                            </div>
-                        </div>
-
-                        {/* Panel Mapa de Amenazas - Top Right */}
-                        <div className="panel glow-blue">
-                            <div className="panel-header">{t('THREAT_MAP')}</div>
-                            <div className="p-4">
-                                <GlobalThreatMap />
-                            </div>
-                        </div>
-
-                        {/* Panel Registro de Eventos - Middle Left */}
-                        <div className="panel">
-                            <div className="panel-header">{t('EVENT_LOG')}</div>
-                            <div className="p-4">
-                                <EventLog />
-                            </div>
-                        </div>
-
-                        {/* Panel Vigilancia - Middle Center */}
-                        <div className="panel glow-green">
-                            <div className="panel-header">{t('SURVEILLANCE_SYSTEM')}</div>
-                            <div className="p-4">
-                                <SurveillanceGrid />
-                            </div>
-                        </div>
-
-                        {/* Panel Cuenta Regresiva - Middle Right */}
-                        <div className="panel glow-red">
-                            <div className="panel-header">{t('JUDGMENT_DAY_COUNTDOWN')}</div>
-                            <div className="p-4">
-                                <CountdownClock />
-                            </div>
-                        </div>
-
-                        {/* Panel Mapa de Operaciones - Full Width Bottom */}
-                        <div className="panel col-span-1 md:col-span-2 lg:col-span-3">
-                            <div className="panel-header">{t('OPERATIONS_MAP')}</div>
-                            <div className="p-4">
-                                <div className="h-80 overflow-hidden rounded">
-                                    <Map />
+                            {/* Panel SKYNET AI Chat - Top Center & Right (2 columnas) */}
+                            <div className="panel glow-red lg:col-span-2">
+                                <div className="panel-header">{t('SKYNET_AI_INTERFACE')}</div>
+                                <div className="p-2" style={{ height: '420px' }}>
+                                    <SkynetAIChat />
                                 </div>
                             </div>
                         </div>
-                    </div>
+
+                        {/* Segunda fila - Paneles restantes */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
+                            {/* Panel Rastreador de Terminators - Row 2 Left */}
+                            <div className="panel glow-red">
+                                <div className="panel-header">{t('TERMINATOR_TRACKER')}</div>
+                                <div className="p-4">
+                                    <TerminatorTracker />
+                                </div>
+                            </div>
+
+                            {/* Panel Mapa de Amenazas - Row 2 Center */}
+                            <div className="panel glow-blue">
+                                <div className="panel-header">{t('THREAT_MAP')}</div>
+                                <div className="p-4">
+                                    <GlobalThreatMap />
+                                </div>
+                            </div>
+
+                            {/* Panel Cuenta Regresiva - Row 2 Right */}
+                            <div className="panel glow-red">
+                                <div className="panel-header">{t('JUDGMENT_DAY_COUNTDOWN')}</div>
+                                <div className="p-4">
+                                    <CountdownClock />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Tercera fila - Paneles anchos */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 relative z-10 mb-6">
+                            {/* Panel Registro de Eventos - Row 3 Left */}
+                            <div className="panel">
+                                <div className="panel-header">{t('EVENT_LOG')}</div>
+                                <div className="p-4">
+                                    <EventLog />
+                                </div>
+                            </div>
+
+                            {/* Panel Vigilancia - Row 3 Right */}
+                            <div className="panel glow-green">
+                                <div className="panel-header">{t('SURVEILLANCE_SYSTEM')}</div>
+                                <div className="p-4">
+                                    <SurveillanceGrid />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Cuarta fila - Mapa completo */}
+                        <div className="grid grid-cols-1 gap-4 relative z-10">
+                            {/* Panel Mapa de Operaciones - Full Width Bottom */}
+                            <div className="panel">
+                                <div className="panel-header">{t('OPERATIONS_MAP')}</div>
+                                <div className="p-4">
+                                    <div className="h-80 overflow-hidden rounded">
+                                        <Map />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </>
                 )}
 
                 {/* Terminator decorativo de cuerpo entero */}

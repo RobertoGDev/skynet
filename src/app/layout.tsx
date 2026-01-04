@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { LanguageProvider } from './context/LanguageContext';
 import { AudioProvider } from './context/AudioContext';
+    import { AIProvider } from './context/AIContext';
 import { AuthProvider } from './components/AuthProvider';
 import 'leaflet/dist/leaflet.css';
 import './globals.css';
@@ -20,7 +21,9 @@ export default function RootLayout({
             <body suppressHydrationWarning={true} className="antialiased bg-black text-white">
                 <AuthProvider>
                     <LanguageProvider>
-                        <AudioProvider>{children}</AudioProvider>
+                        <AudioProvider>
+                            <AIProvider>{children}</AIProvider>
+                        </AudioProvider>
                     </LanguageProvider>
                 </AuthProvider>
             </body>
