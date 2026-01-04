@@ -1,13 +1,11 @@
-"use client";
 import { useState, useEffect } from 'react';
 import { skynetData } from '../data/skynetData';
 import { useLanguage } from '../context/LanguageContext';
-import { translate } from '../data/skynetData';
 
 export default function EventLog() {
     const [events, setEvents] = useState([]);
     const [userLocation, setUserLocation] = useState(null);
-    const { language } = useLanguage();
+    const { language, t } = useLanguage();
 
     // Función para calcular distancia entre dos puntos (Haversine)
     const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -37,64 +35,61 @@ export default function EventLog() {
                     };
                     setUserLocation(location);
 
-                    // Genera evento inicial solo cuando tenemos la ubicación
                     const getInitialEvent = async () => {
                         try {
-                            const initialEvent = await skynetData.generateEvent(location, language);
+                            const initialEvent = await skynetData.generateEvent(location, t);
                             initialEvent.id = Date.now();
                             setEvents([initialEvent]);
                         } catch (error) {
-                            console.error('Error generando evento inicial:', error);
+                            console.error(t('GENERATING_EVENT_ERROR'), error);
                         }
                     };
 
                     getInitialEvent();
 
-                    // Inicia el intervalo solo cuando tenemos la ubicación
                     interval = setInterval(async () => {
                         try {
-                            const newEvent = await skynetData.generateEvent(location, language);
+                            const newEvent = await skynetData.generateEvent(location, t);
                             newEvent.id = Date.now() + Math.random();
 
                             setEvents((prevEvents) => {
                                 return [newEvent, ...prevEvents].slice(0, 10);
                             });
                         } catch (error) {
-                            console.error('Error generando nuevo evento:', error);
+                            console.error(t('GENERATING_EVENT_ERROR'), error);
                         }
                     }, Math.random() * 4000 + 3000);
                 },
-                (error) => {
-                    console.error('Error obteniendo ubicación:', error);
-                    const defaultLocation = { lat: 40.4168, lon: -3.7038 }; // Madrid
-                    setUserLocation(defaultLocation);
+                    (error) => {
+                        console.error(t('LOCATION_ERROR'), error);
+                        const defaultLocation = { lat: 40.4168, lon: -3.7038 };
+                        setUserLocation(defaultLocation);
 
-                    // Usar ubicación por defecto si hay error
-                    const getInitialEvent = async () => {
-                        try {
-                            const initialEvent = await skynetData.generateEvent(defaultLocation, language);
-                            initialEvent.id = Date.now();
-                            setEvents([initialEvent]);
-                        } catch (error) {
-                            console.error('Error generando evento inicial:', error);
-                        }
-                    };
+                        const getInitialEvent = async () => {
+                            try {
+                                const initialEvent = await skynetData.generateEvent(defaultLocation, t);
+                                initialEvent.id = Date.now();
+                                setEvents([initialEvent]);
+                            } catch (error) {
+                                console.error(t('GENERATING_EVENT_ERROR'), error);
+                            }
+                        };
 
-                    getInitialEvent();
+                        getInitialEvent();
 
-                    interval = setInterval(async () => {
-                        try {
-                            const newEvent = await skynetData.generateEvent(defaultLocation, language);
-                            newEvent.id = Date.now() + Math.random();
+                        interval = setInterval(async () => {
+                            try {
+                                const newEvent = await skynetData.generateEvent(defaultLocation, t);
+                                newEvent.id = Date.now() + Math.random();
 
-                            setEvents((prevEvents) => {
-                                return [newEvent, ...prevEvents].slice(0, 10);
-                            });
-                        } catch (error) {
-                            console.error('Error generando nuevo evento:', error);
-                        }
-                    }, Math.random() * 4000 + 3000);
-                }
+                                setEvents((prevEvents) => {
+                                    return [newEvent, ...prevEvents].slice(0, 10);
+                                });
+                            } catch (error) {
+                                console.error(t('GENERATING_EVENT_ERROR'), error);
+                            }
+                        }, Math.random() * 4000 + 3000);
+                    }
             );
         }
 

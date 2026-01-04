@@ -1,6 +1,5 @@
-const EARTH_RADIUS = 6371; // Radio de la Tierra en km
+const EARTH_RADIUS = 6371;
 
-// Base de datos local de ciudades españolas principales
 const SPANISH_CITIES = [
     { name: 'Madrid', coords: [40.4168, -3.7038] },
     { name: 'Barcelona', coords: [41.3851, 2.1734] },
@@ -37,34 +36,32 @@ export const getRandomCoordInRadius = (centerLat, centerLon, radiusKm) => {
 
 // Función para calcular distancia entre dos puntos (Haversine)
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = 
-        Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
-        Math.sin(dLon/2) * Math.sin(dLon/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return EARTH_RADIUS * c;
 };
 
-export const getCityFromCoords = async (lat, lon) => {
+export const getCityFromCoords = async (lat, lon, t = null) => {
     try {
-        // Encontrar la ciudad más cercana
         const closest = SPANISH_CITIES.reduce((prev, curr) => {
             const prevDist = calculateDistance(lat, lon, prev.coords[0], prev.coords[1]);
             const currDist = calculateDistance(lat, lon, curr.coords[0], curr.coords[1]);
             return prevDist < currDist ? prev : curr;
         });
 
-        // Si está a más de 100km de cualquier ciudad conocida
         const distance = calculateDistance(lat, lon, closest.coords[0], closest.coords[1]);
         if (distance > 100) {
-            return `Área ${closest.name}`;
+            const areaPrefix = t ? t('AREA_PREFIX') : 'Área';
+            return `${areaPrefix} ${closest.name}`;
         }
 
         return closest.name;
     } catch (error) {
-        console.error('Error al obtener el nombre de la ciudad:', error);
-        return 'Ubicación Desconocida';
+        const errorMsg = t ? t('CITY_NAME_ERROR') : 'Error al obtener el nombre de la ciudad';
+        const unknownLocation = t ? t('UNKNOWN_LOCATION') : 'Ubicación Desconocida';
+        console.error(errorMsg, error);
+        return unknownLocation;
     }
 };

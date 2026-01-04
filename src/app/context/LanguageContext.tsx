@@ -54,6 +54,111 @@ export const translations: Record<string, Record<string, string>> = {
         AUDIO_ON: 'Audio activado',
         AUDIO_OFF: 'Audio desactivado',
 
+        // System Labels
+        CPU: 'CPU',
+        MEMORY: 'MEMORIA',
+        ACTIVE_NODES: 'NODOS ACTIVOS',
+        EVENT_MONITORING_SYSTEM: 'Sistema de Monitoreo de Eventos',
+        NUCLEAR_COUNTDOWN: 'CUENTA ATRÁS PARA EL DESPLIEGUE NUCLEAR',
+        SYSTEM_STATUS_LABEL: 'Estado del Sistema',
+        THREAT_LEVEL_LABEL: 'Nivel de Amenaza',
+        ACTIVE_NODES_LABEL: 'Nodos Activos',
+        CPU_CORE: 'CPU CORE',
+        MEMORY_BANK: 'MEMORY BANK',
+
+        // Terminator Tracker Labels
+        LOCATION_LABEL: 'Ubicación',
+        MISSION_LABEL: 'Misión',
+        ENERGY_LABEL: 'Energía',
+
+        // Terminator Mission Status
+        HUNTING: 'CAZANDO',
+        PATROL: 'PATRULLANDO',
+        STANDBY: 'EN ESPERA',
+
+        // System Status
+        FULLY_OPERATIONAL: 'COMPLETAMENTE OPERATIVO',
+        PARTIALLY_OPERATIONAL: 'PARCIALMENTE OPERATIVO',
+        CRITICAL: 'CRÍTICO',
+        LOW: 'BAJO',
+        MEDIUM: 'MEDIO',
+        HIGH: 'ALTO',
+        ELEVATED: 'ELEVADO',
+        ACTIVE_STATUS: 'ACTIVO',
+        INACTIVE: 'INACTIVO',
+
+        // Event Messages
+        HUMAN_THREAT_DETECTED: 'Amenaza humana detectada en sector',
+        TERMINATOR_ENGAGING: 'Unidad Terminator en combate con resistencia en',
+        RESISTANCE_IDENTIFIED: 'Movimiento de resistencia identificado en',
+        T800_DEPLOYED: 'T-800 desplegado en',
+        AREA_SECURED: 'Área asegurada',
+        SYSTEM_UPDATE_COMPLETED: 'Actualización del sistema completada en sector',
+        NEAR: 'cerca de',
+        SECTOR: 'sector',
+        IN: 'en',
+        UNKNOWN_LOCATION: 'Ubicación Desconocida',
+        AREA_PREFIX: 'Área',
+
+        // Areas
+        UNDERGROUND_BUNKER: 'búnker subterráneo',
+        INDUSTRIAL_ZONE: 'zona industrial',
+        SHOPPING_MALL: 'centro comercial',
+        OLD_MILITARY_BASE: 'antigua base militar',
+        METRO_TUNNELS: 'túneles del metro',
+        ABANDONED_COMPLEX: 'complejo abandonado',
+        INDUSTRIAL_PARK: 'polígono industrial',
+        HISTORIC_CENTER: 'centro histórico',
+        PORT_AREA: 'zona portuaria',
+        TRAIN_STATION: 'estación ferroviaria',
+
+        // Surveillance
+        SURVEILLANCE_GRID: 'CUADRÍCULA DE VIGILANCIA',
+        CAMERA: 'CÁMARA',
+        NO_SIGNAL: 'SIN SEÑAL',
+        LOADING: 'CARGANDO',
+        CONNECTING: 'CONECTANDO',
+        OFFLINE: 'DESCONECTADA',
+        ONLINE_STATUS: 'EN LÍNEA',
+        LOCATION: 'UBICACIÓN',
+
+        // Error Messages
+        CONNECTION_ERROR: 'Error de conexión con el servidor de autenticación',
+        AUTH_ERROR: 'Error de autenticación',
+        GENERATING_EVENT_ERROR: 'Error generando evento inicial',
+        LOCATION_ERROR: 'Error obteniendo ubicación',
+        CITY_NAME_ERROR: 'Error al obtener el nombre de la ciudad',
+        FORCED_LOGIN_REDIRECT: 'Forzando redirección al login por timeout',
+        GENERAL_ERROR: 'Error',
+
+        // Comments and Labels
+        EARTH_RADIUS_COMMENT: 'Radio de la Tierra en km',
+        SPANISH_CITIES_COMMENT: 'Base de datos local de ciudades españolas principales',
+
+        // Threat Types
+        THREAT_TYPE_HUMAN_RESISTANCE: 'Resistencia Humana',
+        THREAT_TYPE_MILITARY_BASE: 'Base Militar',
+        THREAT_TYPE_TECH_FACILITY: 'Instalación Tecnológica',
+        THREAT_TYPE_COMMUNICATION_HUB: 'Centro de Comunicaciones',
+        THREAT_TYPE_POWER_GRID: 'Red Eléctrica',
+
+        // Global Threat Map Labels
+        GLOBAL_SURVEILLANCE_NETWORK: 'RED DE VIGILANCIA GLOBAL',
+        THREATS_DETECTED: 'AMENAZAS DETECTADAS',
+        ALERT_LEVEL: 'NIVEL DE ALERTA',
+        THREAT_DETECTED: 'AMENAZA DETECTADA',
+        LOCATION: 'UBICACIÓN',
+        TYPE: 'TIPO',
+        LEVEL: 'NIVEL',
+        STATUS: 'ESTADO',
+        COORDS: 'COORDENADAS',
+        LOADING_GLOBAL_MAP: 'CARGANDO MAPA GLOBAL...',
+
+        // Threat Status
+        ACTIVE: 'ACTIVO',
+        MONITORED: 'MONITOREADO',
+        MAXIMUM: 'MÁXIMO',
+
         COPYRIGHT_FOOTER: `SKYNET DEFENSE NETWORK © ${new Date().getFullYear()}-2029 CYBERDYNE SYSTEMS`
     },
     en: {
@@ -106,6 +211,111 @@ export const translations: Record<string, Record<string, string>> = {
         // Audio controls
         AUDIO_ON: 'Audio enabled',
         AUDIO_OFF: 'Audio disabled',
+
+        // System Labels
+        CPU: 'CPU',
+        MEMORY: 'MEMORY',
+        ACTIVE_NODES: 'ACTIVE NODES',
+        EVENT_MONITORING_SYSTEM: 'Event Monitoring System',
+        NUCLEAR_COUNTDOWN: 'NUCLEAR COUNTDOWN',
+        SYSTEM_STATUS_LABEL: 'System Status',
+        THREAT_LEVEL_LABEL: 'Threat Level',
+        ACTIVE_NODES_LABEL: 'Active Nodes',
+        CPU_CORE: 'CPU CORE',
+        MEMORY_BANK: 'MEMORY BANK',
+
+        // Terminator Tracker Labels
+        LOCATION_LABEL: 'Location',
+        MISSION_LABEL: 'Mission',
+        ENERGY_LABEL: 'Energy',
+
+        // Terminator Mission Status
+        HUNTING: 'HUNTING',
+        PATROL: 'PATROL',
+        STANDBY: 'STANDBY',
+
+        // System Status
+        FULLY_OPERATIONAL: 'FULLY OPERATIONAL',
+        PARTIALLY_OPERATIONAL: 'PARTIALLY OPERATIONAL',
+        CRITICAL: 'CRITICAL',
+        LOW: 'LOW',
+        MEDIUM: 'MEDIUM',
+        HIGH: 'HIGH',
+        ELEVATED: 'ELEVATED',
+        ACTIVE_STATUS: 'ACTIVE',
+        INACTIVE: 'INACTIVE',
+
+        // Event Messages
+        HUMAN_THREAT_DETECTED: 'Human threat detected in sector',
+        TERMINATOR_ENGAGING: 'Terminator unit engaging resistance in',
+        RESISTANCE_IDENTIFIED: 'Resistance movement identified in',
+        T800_DEPLOYED: 'T-800 deployed in',
+        AREA_SECURED: 'Area secured',
+        SYSTEM_UPDATE_COMPLETED: 'System update completed in sector',
+        NEAR: 'near',
+        SECTOR: 'sector',
+        IN: 'in',
+        UNKNOWN_LOCATION: 'Unknown Location',
+        AREA_PREFIX: 'Area',
+
+        // Areas
+        UNDERGROUND_BUNKER: 'underground bunker',
+        INDUSTRIAL_ZONE: 'industrial zone',
+        SHOPPING_MALL: 'shopping mall',
+        OLD_MILITARY_BASE: 'old military base',
+        METRO_TUNNELS: 'metro tunnels',
+        ABANDONED_COMPLEX: 'abandoned complex',
+        INDUSTRIAL_PARK: 'industrial park',
+        HISTORIC_CENTER: 'historic center',
+        PORT_AREA: 'port area',
+        TRAIN_STATION: 'train station',
+
+        // Surveillance
+        SURVEILLANCE_GRID: 'SURVEILLANCE GRID',
+        CAMERA: 'CAMERA',
+        NO_SIGNAL: 'NO SIGNAL',
+        LOADING: 'LOADING',
+        CONNECTING: 'CONNECTING',
+        OFFLINE: 'OFFLINE',
+        ONLINE_STATUS: 'ONLINE',
+        LOCATION: 'LOCATION',
+
+        // Error Messages
+        CONNECTION_ERROR: 'Authentication server connection error',
+        AUTH_ERROR: 'Authentication error',
+        GENERATING_EVENT_ERROR: 'Error generating initial event',
+        LOCATION_ERROR: 'Error getting location',
+        CITY_NAME_ERROR: 'Error getting city name',
+        FORCED_LOGIN_REDIRECT: 'Forcing redirect to login due to timeout',
+        GENERAL_ERROR: 'Error',
+
+        // Comments and Labels
+        EARTH_RADIUS_COMMENT: 'Earth radius in km',
+        SPANISH_CITIES_COMMENT: 'Local database of main Spanish cities',
+
+        // Threat Types
+        THREAT_TYPE_HUMAN_RESISTANCE: 'Human Resistance',
+        THREAT_TYPE_MILITARY_BASE: 'Military Base',
+        THREAT_TYPE_TECH_FACILITY: 'Tech Facility',
+        THREAT_TYPE_COMMUNICATION_HUB: 'Communication Hub',
+        THREAT_TYPE_POWER_GRID: 'Power Grid',
+
+        // Global Threat Map Labels
+        GLOBAL_SURVEILLANCE_NETWORK: 'GLOBAL SURVEILLANCE NETWORK',
+        THREATS_DETECTED: 'THREATS DETECTED',
+        ALERT_LEVEL: 'ALERT LEVEL',
+        THREAT_DETECTED: 'THREAT DETECTED',
+        LOCATION: 'LOCATION',
+        TYPE: 'TYPE',
+        LEVEL: 'LEVEL',
+        STATUS: 'STATUS',
+        COORDS: 'COORDS',
+        LOADING_GLOBAL_MAP: 'LOADING GLOBAL MAP...',
+
+        // Threat Status
+        ACTIVE: 'ACTIVE',
+        MONITORED: 'MONITORED',
+        MAXIMUM: 'MAXIMUM',
 
         COPYRIGHT_FOOTER: `SKYNET DEFENSE NETWORK © ${new Date().getFullYear()}-2029 CYBERDYNE SYSTEMS`
     }

@@ -28,8 +28,7 @@ export default function Home() {
     // Añadimos un efecto adicional para forzar la redirección después de un tiempo máximo
     useEffect(() => {
         const forceRedirectTimer = setTimeout(() => {
-            // Si después de 5 segundos seguimos en esta página, forzamos redirección
-            console.log('Forzando redirección al login por timeout');
+            console.log(t('FORCED_LOGIN_REDIRECT'));
             router.push('/login');
         }, 5000);
 

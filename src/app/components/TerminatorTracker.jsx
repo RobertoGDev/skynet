@@ -2,11 +2,10 @@
 import { useState, useEffect } from 'react';
 import { getRandomCoordInRadius, getCityFromCoords } from '../utils/handleCords';
 import { useLanguage } from '../context/LanguageContext';
-import { translate } from '../data/skynetData';
 
 export default function TerminatorTracker({ userLocation }) {
     const [terminators, setTerminators] = useState([]);
-    const { language } = useLanguage();
+    const { language, t } = useLanguage();
 
     const terminatorModels = ['T-800', 'T-1000', 'T-X', 'T-3000', 'T-Rev-9'];
     const terminatorImages = ['/terminator-t800.png', '/terminator-t1000.png', '/terminator-tx.png', '/terminator-t3000.png', '/terminator-rev9.png'];
@@ -139,20 +138,20 @@ export default function TerminatorTracker({ userLocation }) {
                                 <div className="text-sm font-mono text-white">
                                     <span className="text-red-400">UNIT</span> {unit.model}-{unit.id.toString().padStart(2, '0')}
                                 </div>
-                                <div className={`text-xs font-bold ${getStatusColor(unit.status)} animate-pulse`}>● {translate(unit.status, 'terminatorStatus', language)}</div>
+                                <div className={`text-xs font-bold ${getStatusColor(unit.status)} animate-pulse`}>● {t(unit.status)}</div>
                             </div>
 
                             <div className="text-xs text-gray-400 mt-1 space-y-1">
                                 <div className="flex justify-between">
-                                    <span>Ubicación:</span>
+                                    <span>{t('LOCATION_LABEL')}:</span>
                                     <span className="text-cyan-400">{unit.location}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span>Misión:</span>
-                                    <span className={getMissionColor(unit.missionStatus)}>{unit.missionStatus}</span>
+                                    <span>{t('MISSION_LABEL')}:</span>
+                                    <span className={getMissionColor(unit.missionStatus)}>{t(unit.missionStatus)}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span>Energía:</span>
+                                    <span>{t('ENERGY_LABEL')}:</span>
                                     <div className="flex items-center space-x-2">
                                         <div className="w-16 h-1 bg-gray-700 rounded overflow-hidden">
                                             <div

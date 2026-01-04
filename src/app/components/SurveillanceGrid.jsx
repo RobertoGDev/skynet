@@ -1,11 +1,10 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { translate } from '../data/skynetData';
 
 // Componente para una única cámara
 const Camera = ({ id, status, location, videoSrc }) => {
-    const { language } = useLanguage();
+    const { language, t } = useLanguage();
     const [loadingState, setLoadingState] = useState('CONNECTING');
     const [retryCount, setRetryCount] = useState(0);
     const videoRef = useRef(null);
@@ -34,25 +33,25 @@ const Camera = ({ id, status, location, videoSrc }) => {
             case 'CONNECTING':
                 return (
                     <div className="absolute inset-0 flex items-center justify-center bg-black/90">
-                        <span className="text-yellow-500 text-xs animate-pulse">{translate('CONNECTING', 'surveillance', language)}...</span>
+                        <span className="text-yellow-500 text-xs animate-pulse">{t('CONNECTING')}...</span>
                     </div>
                 );
             case 'NO_SIGNAL':
                 return (
                     <div className="absolute inset-0 flex items-center justify-center bg-black">
-                        <span className="text-red-500 text-xs blink">{translate('NO_SIGNAL', 'surveillance', language)}</span>
+                        <span className="text-red-500 text-xs blink">{t('NO_SIGNAL')}</span>
                     </div>
                 );
             case 'OFFLINE':
                 return (
                     <div className="absolute inset-0 flex items-center justify-center bg-black">
-                        <span className="text-red-600 text-xs">{translate('OFFLINE', 'surveillance', language)}</span>
+                        <span className="text-red-600 text-xs">{t('OFFLINE')}</span>
                     </div>
                 );
             case 'ONLINE':
                 return (
                     <div className="relative w-full h-full">
-                        <div className="absolute top-1 left-1 text-green-400 text-xs font-mono z-10">● {translate('ONLINE', 'surveillance', language)}</div>
+                        <div className="absolute top-1 left-1 text-green-400 text-xs font-mono z-10">● {t('ONLINE_STATUS')}</div>
                         <div className="absolute top-1 right-1 text-red-400 text-xs font-mono z-10">REC</div>
                         {/* Video feed real */}
                         {videoSrc ? (

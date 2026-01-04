@@ -49,45 +49,43 @@ export default function LoginPage() {
     setError('');
 
     try {
-      // Simulamos un pequeño retraso para dar efecto de procesamiento
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const result = await signIn('credentials', {
-        redirect: false,
-        username,
-        password,
-      });
+        // Simulamos un pequeño retraso para dar efecto de procesamiento
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Verificar si result es undefined o null (puede ocurrir en caso de error de red)
-      if (!result) {
-        console.error('Error de conexión con el servidor de autenticación');
+        const result = await signIn('credentials', {
+            redirect: false,
+            username,
+            password
+        });
+
+        if (!result) {
+            console.error(t('CONNECTION_ERROR'));
+            setError(t('SYSTEM_ERROR'));
+            setIsLoading(false);
+            return;
+        }
+
+        if (result.error) {
+            console.error(t('AUTH_ERROR'), result.error);
+            setError(t('ACCESS_DENIED'));
+            setIsLoading(false);
+            return;
+        }
+
+        console.log('Autenticación exitosa, redirigiendo...');
+        // Añadimos un pequeño retraso antes de redirigir para asegurar que el estado de sesión se actualice
+        setTimeout(() => {
+            router.push('/dashboard');
+        }, 500);
+    } catch (error) {
+        console.error(t('AUTH_ERROR'), error);
         setError(t('SYSTEM_ERROR'));
         setIsLoading(false);
-        return;
-      }
-
-      if (result.error) {
-        console.error('Error de autenticación:', result.error);
-        setError(t('ACCESS_DENIED'));
-        setIsLoading(false);
-        return;
-      }
-
-      console.log('Autenticación exitosa, redirigiendo...');
-      // Añadimos un pequeño retraso antes de redirigir para asegurar que el estado de sesión se actualice
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 500);
-    } catch (error) {
-      console.error('Error de autenticación:', error);
-      setError(t('SYSTEM_ERROR'));
-      setIsLoading(false);
     } finally {
-      // Asegurarnos de que isLoading se establece a false en todos los casos
-      // después de un tiempo máximo (5 segundos)
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 5000);
+        // después de un tiempo máximo (5 segundos)
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 5000);
     }
   };
 

@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { translate } from '../data/skynetData';
 
 export default function SystemStatus() {
     const [status, setStatus] = useState({
@@ -11,7 +10,7 @@ export default function SystemStatus() {
         systemStatus: 'INITIALIZING',
         threatLevel: 'ELEVATED'
     });
-    const { language } = useLanguage();
+    const { language, t } = useLanguage();
 
     const getRandomThreatLevel = () => {
         const levels = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL', 'ELEVATED'];
@@ -109,7 +108,7 @@ export default function SystemStatus() {
                 {/* Barra de CPU */}
                 <div>
                     <div className="flex justify-between items-center mb-3">
-                        <span className="text-xs text-red-400 uppercase tracking-widest font-bold font-mono">● CPU CORE</span>
+                        <span className="text-xs text-red-400 uppercase tracking-widest font-bold font-mono">● {t('CPU_CORE')}</span>
                         <span className={`text-lg font-bold font-mono ${getStatusColor(status.cpuLoad)} text-shadow`}>{status.cpuLoad}%</span>
                     </div>
 
@@ -161,7 +160,7 @@ export default function SystemStatus() {
                 {/* Barra de Memoria */}
                 <div>
                     <div className="flex justify-between items-center mb-3">
-                        <span className="text-xs text-cyan-400 uppercase tracking-widest font-bold font-mono">● MEMORY BANK</span>
+                        <span className="text-xs text-cyan-400 uppercase tracking-widest font-bold font-mono">● {t('MEMORY_BANK')}</span>
                         <span className={`text-lg font-bold font-mono ${getStatusColor(status.memoryUsage)} text-shadow`}>{status.memoryUsage}%</span>
                     </div>
 
@@ -214,18 +213,18 @@ export default function SystemStatus() {
             {/* Información del sistema */}
             <div className="space-y-3 font-mono">
                 <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-400 uppercase">Nodos Activos:</span>
+                    <span className="text-xs text-gray-400 uppercase">{t('ACTIVE_NODES_LABEL')}:</span>
                     <span className="text-cyan-400 font-bold">{status.activeNodes.toLocaleString()}</span>
                 </div>
 
                 <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-400 uppercase">Estado del Sistema:</span>
-                    <span className={`text-sm font-bold ${getSystemStatusColor(status.systemStatus)} animate-pulse`}>{translate(status.systemStatus, 'systemStatus', language)}</span>
+                    <span className="text-xs text-gray-400 uppercase">{t('SYSTEM_STATUS_LABEL')}:</span>
+                    <span className={`text-sm font-bold ${getSystemStatusColor(status.systemStatus)} animate-pulse`}>{t(status.systemStatus)}</span>
                 </div>
 
                 <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-400 uppercase">Nivel de Amenaza:</span>
-                    <span className={`text-sm font-bold text-red-400 animate-pulse`}>{translate(status.threatLevel, 'threatLevel', language)}</span>
+                    <span className="text-xs text-gray-400 uppercase">{t('THREAT_LEVEL_LABEL')}:</span>
+                    <span className={`text-sm font-bold text-red-400 animate-pulse`}>{t(status.threatLevel)}</span>
                 </div>
             </div>
 

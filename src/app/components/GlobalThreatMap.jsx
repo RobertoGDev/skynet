@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useLanguage } from '../context/LanguageContext';
-import { translate } from '../data/skynetData';
 import L from 'leaflet';
 
 // Importar el mapa dinámicamente para evitar problemas de SSR
@@ -23,7 +22,7 @@ function GlobalThreatMap({ userLocation }) {
     const [threats, setThreats] = useState([]);
     const [alertLevel, setAlertLevel] = useState('MEDIUM');
     const [isMapReady, setIsMapReady] = useState(false);
-    const { language } = useLanguage();
+    const { language, t } = useLanguage();
 
     const threatTypes = ['HUMAN_RESISTANCE', 'MILITARY_BASE', 'TECH_FACILITY', 'COMMUNICATION_HUB', 'POWER_GRID'];
     const alertLevels = ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL', 'MAXIMUM'];
@@ -154,15 +153,21 @@ function GlobalThreatMap({ userLocation }) {
                                 <Marker key={threat.id} position={threat.coords} icon={icon || undefined}>
                                     <Popup className="threat-popup">
                                         <div className="bg-black text-green-400 font-mono text-xs p-2">
-                                            <div className="text-red-400 font-bold mb-1">THREAT DETECTED</div>
-                                            <div>LOCATION: {threat.location}</div>
-                                            <div>TYPE: {translate(threat.type, 'threatTypes', language)}</div>
+                                            <div className="text-red-400 font-bold mb-1">{t('THREAT_DETECTED')}</div>
                                             <div>
-                                                LEVEL: <span className={getAlertColor(threat.level).replace('text-', 'text-')}>{threat.level}</span>
+                                                {t('LOCATION')}: {threat.location}
                                             </div>
-                                            <div>STATUS: {threat.status}</div>
                                             <div>
-                                                COORDS: {threat.coords[0].toFixed(4)}, {threat.coords[1].toFixed(4)}
+                                                {t('TYPE')}: {t('THREAT_TYPE_' + threat.type)}
+                                            </div>
+                                            <div>
+                                                {t('LEVEL')}: <span className={getAlertColor(threat.level).replace('text-', 'text-')}>{t(threat.level)}</span>
+                                            </div>
+                                            <div>
+                                                {t('STATUS')}: {t(threat.status)}
+                                            </div>
+                                            <div>
+                                                {t('COORDS')}: {threat.coords[0].toFixed(4)}, {threat.coords[1].toFixed(4)}
                                             </div>
                                         </div>
                                     </Popup>
@@ -172,16 +177,18 @@ function GlobalThreatMap({ userLocation }) {
                     </MapContainer>
                 ) : (
                     <div className="w-full h-full bg-gray-900 flex items-center justify-center border border-red-500/30">
-                        <div className="text-cyan-400 font-mono text-sm animate-pulse">CARGANDO MAPA GLOBAL...</div>
+                        <div className="text-cyan-400 font-mono text-sm animate-pulse">{t('LOADING_GLOBAL_MAP')}</div>
                     </div>
                 )}
 
                 {/* Overlay de HUD */}
                 <div className="absolute top-2 left-2 z-[1000] bg-black/80 p-2 rounded border border-red-500/50 font-mono text-xs">
-                    <div className="text-red-400 mb-1">GLOBAL SURVEILLANCE NETWORK</div>
-                    <div className="text-green-400">THREATS DETECTED: {threats.length}</div>
+                    <div className="text-red-400 mb-1">{t('GLOBAL_SURVEILLANCE_NETWORK')}</div>
+                    <div className="text-green-400">
+                        {t('THREATS_DETECTED')}: {threats.length}
+                    </div>
                     <div className="text-yellow-400">
-                        ALERT LEVEL: <span className={`font-bold ${getAlertColor(alertLevel)} animate-pulse`}>{alertLevel}</span>
+                        {t('ALERT_LEVEL')}: <span className={`font-bold ${getAlertColor(alertLevel)} animate-pulse`}>{t(alertLevel)}</span>
                     </div>
                 </div>
 
@@ -189,19 +196,19 @@ function GlobalThreatMap({ userLocation }) {
                 <div className="absolute top-2 right-2 z-[1000] space-y-1">
                     <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-red-500/30 text-xs font-mono">
                         <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                        <span className="text-red-400">CRITICAL</span>
+                        <span className="text-red-400">{t('CRITICAL')}</span>
                     </div>
                     <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-orange-500/30 text-xs font-mono">
                         <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                        <span className="text-orange-400">HIGH</span>
+                        <span className="text-orange-400">{t('HIGH')}</span>
                     </div>
                     <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-yellow-500/30 text-xs font-mono">
                         <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-                        <span className="text-yellow-400">MEDIUM</span>
+                        <span className="text-yellow-400">{t('MEDIUM')}</span>
                     </div>
                     <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-green-500/30 text-xs font-mono">
                         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                        <span className="text-green-400">LOW</span>
+                        <span className="text-green-400">{t('LOW')}</span>
                     </div>
                 </div>
 
@@ -239,9 +246,9 @@ function GlobalThreatMap({ userLocation }) {
                                 <div className={`w-2 h-2 rounded-full ${getThreatColor(threat.level)} animate-pulse`}></div>
                                 <span className="text-white">{threat.location}</span>
                                 <span className="text-gray-400">|</span>
-                                <span className="text-cyan-400">{translate(threat.type, 'threatTypes', language)}</span>
+                                <span className="text-cyan-400">{t('THREAT_TYPE_' + threat.type)}</span>
                             </div>
-                            <div className={`${getAlertColor(threat.level)} font-bold`}>{threat.level}</div>
+                            <div className={`${getAlertColor(threat.level)} font-bold`}>{t(threat.level)}</div>
                         </div>
                     ))}
                 </div>
