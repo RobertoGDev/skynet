@@ -146,6 +146,22 @@ const CountdownClock = () => {
                         <div className="text-yellow-400 font-mono text-sm mt-2">NUCLEAR DEPLOYMENT IN PROGRESS</div>
                     </div>
                 )}
+
+                {/* Imágenes silonuclear debajo del contador */}
+                <div className="mt-6 space-y-4">
+                    <div className="flex flex-col items-center space-y-4">
+                        <img 
+                            src="/images/silonuclear1.jpg" 
+                            alt="Nuclear Silo 1" 
+                            className="w-full max-w-md h-auto rounded-lg border-2 border-red-500/50 shadow-lg shadow-red-500/20"
+                        />
+                        <img 
+                            src="/images/silonuclear2.jpg" 
+                            alt="Nuclear Silo 2" 
+                            className="w-full max-w-md h-auto rounded-lg border-2 border-red-500/50 shadow-lg shadow-red-500/20"
+                        />
+                    </div>
+                </div>
         </div>
     );
 };
