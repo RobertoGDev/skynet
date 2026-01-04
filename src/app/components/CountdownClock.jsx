@@ -5,8 +5,8 @@ import { useLanguage } from '../context/LanguageContext';
 
 const CountdownClock = () => {
     const [timeLeft, setTimeLeft] = useState({
-        days: 63,
-        hours: 2,
+        days: 2,
+        hours: 3,
         minutes: 14,
         seconds: 56
     });

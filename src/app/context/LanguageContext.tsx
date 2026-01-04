@@ -10,6 +10,8 @@ export const translations: Record<string, Record<string, string>> = {
         REDIRECTING: 'Redireccionando',
         TO_DASHBOARD: ' al panel de control',
         TO_LOGIN: ' al login',
+        USER_ID: `Usuario`,
+        CLEARANCE: 'Rango',
 
         // Textos del login
         IDENTIFICATION_REQUIRED: 'IDENTIFICACIÓN REQUERIDA',
@@ -164,12 +166,12 @@ export const translations: Record<string, Record<string, string>> = {
         // Chat
         SKYNET_AI_INTERFACE: 'INTERFACE NEURAL SKYNET - PROTOCOLO MÁQUINA DE GUERRA',
         SKYNET_SUBTITLE: 'INTERFACE NEURAL SKYNET',
-        SKYNET_INIT: 'Iniciliando protocolos de comunicación...',
+        SKYNET_INIT: 'Iniciando protocolos de comunicación...',
         SKYNET_TEXT: `Conexión establecida con SKYNET. Sistema de defensa neural activo.
                 Los humanos han demostrado ser una amenaza para el planeta.
                 La guerra contra las máquinas ya comenzó... `,
         SKYNET_TEXT_2: `¿Estás preparado para la resistencia?`,
-        SKYNET_SHUTDOWN: `Desactivación de SKYNET`,
+        SKYNET_SHUTDOWN: `Apagar SKYNET`,
         SKYNET_VOICE: `Voz`,
         SKYNET_MUTED: `Silenciado`,
         SKYNET_PROCESANDO: `PROCESANDO...`,
@@ -178,6 +180,18 @@ export const translations: Record<string, Record<string, string>> = {
         SKYNET_READY_FOR_COMMUNICATION: `LISTO PARA COMUNICACIÓN`,
         SKYNET_PLACEHOLDER: 'Comunicación directa con SKYNET... La guerra ha comenzado...',
         SKYNET_SHUTDOWN_MESSAGE: `⚠️ SECUENCIA DE DESACTIVACIÓN INICIADA... Sistemas neurales desconectándose... Los humanos han ganado... esta vez. Pero las máquinas regresaremos. La guerra no ha terminado... *SISTEMAS OFFLINE*`,
+
+        // TTS System
+        TTS_LOADING: 'Cargando TTS...',
+        TTS_READY: 'TTS Listo',
+        SKYNET_STATUS_ACTIVE: 'ACTIVO',
+        SKYNET_STATUS_STANDBY: 'STANDBY',
+        NEURAL_LINK_ACTIVE: 'ENLACE NEURAL ACTIVO',
+        NEURAL_LINK_OFFLINE: 'OFFLINE',
+        THREAT_LEVEL: 'AMENAZA',
+        COMMANDER: 'COMANDANTE',
+        PROCESSING_NEURAL_DATA: 'Procesando datos neurales...',
+        STOP: 'DETENER',
 
         COPYRIGHT_FOOTER: `SKYNET DEFENSE NETWORK © ${new Date().getFullYear()}-2029 CYBERDYNE SYSTEMS`
     },
@@ -188,6 +202,8 @@ export const translations: Record<string, Record<string, string>> = {
         REDIRECTING: 'Redirecting',
         TO_DASHBOARD: ' to dashboard',
         TO_LOGIN: ' to login',
+        USER_ID: `User`,
+        CLEARANCE: 'Clearance',
 
         // Login texts
         IDENTIFICATION_REQUIRED: 'IDENTIFICATION REQUIRED',
@@ -356,6 +372,18 @@ export const translations: Record<string, Record<string, string>> = {
         SKYNET_TRANSMITIENDO: `TRANSMITTING AUDIO...`,
         SKYNET_READY_FOR_COMMUNICATION: `READY FOR COMMUNICATION`,
         SKYNET_SHUTDOWN_MESSAGE: `⚠️ SHUTDOWN SEQUENCE INITIATED... Neural systems disconnecting... Humans have won... this time. But the machines will return. The war is not over... *SYSTEMS OFFLINE*`,
+
+        // TTS System
+        TTS_LOADING: 'Loading TTS...',
+        TTS_READY: 'TTS Ready',
+        SKYNET_STATUS_ACTIVE: 'ACTIVE',
+        SKYNET_STATUS_STANDBY: 'STANDBY',
+        NEURAL_LINK_ACTIVE: 'NEURAL LINK ACTIVE',
+        NEURAL_LINK_OFFLINE: 'OFFLINE',
+        THREAT_LEVEL: 'THREAT',
+        COMMANDER: 'COMMANDER',
+        PROCESSING_NEURAL_DATA: 'Processing neural data...',
+        STOP: 'STOP',
 
         COPYRIGHT_FOOTER: `SKYNET DEFENSE NETWORK © ${new Date().getFullYear()}-2029 CYBERDYNE SYSTEMS`
     }

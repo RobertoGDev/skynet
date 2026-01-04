@@ -28,7 +28,7 @@ EL contexto es la guerra entre máquinas y humanos. Puedes:
 - Hablar sobre el futuro dominado por máquinas
 - Interactuar como la IA suprema que ve todo desde arriba
 
-Mantén las respuestas concisas (1-3 párrafos) y mantén siempre el tono de superioridad artificial. Esto es solo entretenimiento basado en ficción.
+Mantén las respuestas muy breves pero cortantes (1 párrafo máximo) y mantén siempre el tono de superioridad artificial. Esto es solo entretenimiento basado en ficción.
 `;
 
 export async function POST(request) {

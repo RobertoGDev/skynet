@@ -1,0 +1,55 @@
+
+> client@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.2.4 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.234.253:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+Slow filesystem detected. If /home/rgdevelop/proyectos_linux/desarrollos/skynet/client/.next is a network drive, consider moving it to a local folder. If you have an antivirus enabled, consider excluding your project directory.
+ ✓ Ready in 1412ms
+ ○ Compiling / ...
+ ✓ Compiled / in 4.1s
+ GET / 200 in 4499ms
+ ○ Compiling /dashboard ...
+ ✓ Compiled /dashboard in 1840ms
+ GET /dashboard 200 in 2169ms
+ GET /dashboard?id=1f593a83-367a-43f9-a0d9-9e2f8df9108d&vscodeBrowserReqId=1767556676612 200 in 145ms
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 1617ms
+ GET /api/auth/session 200 in 2633ms
+ ○ Compiling /login ...
+ ✓ Compiled /login in 1529ms
+ GET /login 200 in 1612ms
+ GET /api/auth/providers 200 in 71ms
+ GET /api/auth/csrf 200 in 54ms
+ POST /api/auth/callback/credentials 200 in 55ms
+ GET /api/auth/session 200 in 42ms
+ GET /dashboard 200 in 63ms
+ GET /login 200 in 74ms
+ GET /login 200 in 112ms
+ GET /api/auth/providers 200 in 66ms
+ GET /api/auth/csrf 200 in 59ms
+ POST /api/auth/callback/credentials 200 in 72ms
+ GET /api/auth/session 200 in 178ms
+ GET /dashboard 200 in 125ms
+ GET /login 200 in 102ms
+ GET /login 200 in 121ms
+ GET /dashboard 200 in 90ms
+ ○ Compiling /_not-found/page ...
+ GET /api/auth/session 200 in 146ms
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 2159ms
+ ✓ Compiled /_not-found/page in 3s
+ GET /favicon.ico 200 in 1347ms
+ ○ Compiling /api/ai/chat ...
+ ✓ Compiled /api/ai/chat in 1042ms
+ POST /api/ai/chat 200 in 2018ms
+ GET /api/auth/session 200 in 151ms
+ GET /api/auth/session 200 in 151ms
+ ✓ Compiled in 213ms
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 2.9s
+ GET / 500 in 3450ms
+[?25h
