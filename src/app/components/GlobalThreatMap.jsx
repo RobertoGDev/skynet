@@ -211,19 +211,40 @@ function GlobalThreatMap({ userLocation }) {
                     style={{ animation: 'scan 3s ease-in-out infinite' }}></div>
             </div>
 
-            {/* Lista de amenazas - ocupa todo el espacio restante */}
-            <div className="flex-1 min-h-0 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-500 space-y-1 pr-1">
-                {threats.map((threat) => (
-                    <div key={threat.id} className="flex items-center justify-between text-xs font-mono bg-gray-800/30 p-2 rounded border-l-2 border-red-500/50 hover:bg-gray-700/30 transition-colors">
-                        <div className="flex items-center space-x-2">
-                            <div className={`w-2 h-2 rounded-full ${getThreatColor(threat.level)} animate-pulse`}></div>
-                            <span className="text-white">{threat.location}</span>
-                            <span className="text-gray-400">|</span>
-                            <span className="text-cyan-400">{translate(threat.type, 'threatTypes', language)}</span>
+            {/* Panel inferior dividido: 1/3 Terminator + 2/3 Lista de amenazas */}
+            <div className="flex-shrink-0 h-full flex gap-4">
+                {/* Columna del Terminator (1/3) */}
+                <div className="relative w-1/3 aspect-[9/27] overflow-hidden bg-gray-800/20 rounded border border-red-500/30 p-2 min-h-full max-h-[363px] h-full">
+                    {/* Terminator 1 */}
+                    <img
+                        src="/images/sprite-terminators.png"
+                        alt="Terminator"
+                        className="relative max-w-none h-auto"
+                        style={{
+                            left: '-46%',
+                            top: '-6%',
+                            width: '1270%',
+                            filter: 'brightness(1.2) contrast(1.3) sepia(0.3) hue-rotate(340deg)'
+                        }}
+                    />
+                </div>
+
+                {/* Lista de amenazas (2/3) - Ocupa todo el alto */}
+                <div className="w-2/3 h-full overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-red-500 space-y-1 pr-1">
+                    {threats.map((threat) => (
+                        <div
+                            key={threat.id}
+                            className="flex items-center justify-between text-xs font-mono bg-gray-800/30 p-2 rounded border-l-2 border-red-500/50 hover:bg-gray-700/30 transition-colors">
+                            <div className="flex items-center space-x-2">
+                                <div className={`w-2 h-2 rounded-full ${getThreatColor(threat.level)} animate-pulse`}></div>
+                                <span className="text-white">{threat.location}</span>
+                                <span className="text-gray-400">|</span>
+                                <span className="text-cyan-400">{translate(threat.type, 'threatTypes', language)}</span>
+                            </div>
+                            <div className={`${getAlertColor(threat.level)} font-bold`}>{threat.level}</div>
                         </div>
-                        <div className={`${getAlertColor(threat.level)} font-bold`}>{threat.level}</div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );
