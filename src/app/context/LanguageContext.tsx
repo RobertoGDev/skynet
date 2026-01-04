@@ -150,6 +150,12 @@ export const translations: Record<string, Record<string, string>> = {
         COORDS: 'COORDENADAS',
         LOADING_GLOBAL_MAP: 'CARGANDO MAPA GLOBAL...',
 
+        // ClockTime
+        DAYS: 'DÍAS',
+        HOURS: 'HORAS',
+        MINUTES: 'MINUTOS',
+        SECONDS: 'SEGUNDOS',
+
         // Threat Status
         ACTIVE: 'ACTIVO',
         MONITORED: 'MONITOREADO',
@@ -303,6 +309,12 @@ export const translations: Record<string, Record<string, string>> = {
         STATUS: 'STATUS',
         COORDS: 'COORDS',
         LOADING_GLOBAL_MAP: 'LOADING GLOBAL MAP...',
+
+        // ClockTime
+        DAYS: 'DAYS',
+        HOURS: 'HOURS',
+        MINUTES: 'MINUTES',
+        SECONDS: 'SECONDS',
 
         // Threat Status
         ACTIVE: 'ACTIVE',

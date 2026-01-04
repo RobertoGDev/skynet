@@ -1,6 +1,7 @@
 // client/src/components/CountdownClock.js
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const CountdownClock = () => {
     const [timeLeft, setTimeLeft] = useState({
@@ -40,128 +41,126 @@ const CountdownClock = () => {
     const criticalMode = timeLeft.days === 0 && timeLeft.hours < 24;
     const isCountdownFinished = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes === 0 && timeLeft.seconds === 0;
 
+    const { language, t } = useLanguage();
+
     return (
         <div className="h-full p-4 space-y-4">
             {/* Display digital del countdown - estilo de la imagen */}
-                {!isCountdownFinished ? (
-                    <div className="relative">
-                        {/* Fondo del display */}
-                        <div className="bg-black border-2 border-red-500/50 rounded-lg px-8 py-6 relative overflow-hidden">
-                            {/* Efecto de brillo interno */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-red-900/10 via-red-500/5 to-red-900/10"></div>
+            {!isCountdownFinished ? (
+                <div className="relative">
+                    {/* Fondo del display */}
+                    <div className="bg-black border-2 border-red-500/50 rounded-lg px-8 py-6 relative overflow-hidden">
+                        {/* Efecto de brillo interno */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-red-900/10 via-red-500/5 to-red-900/10"></div>
 
-                            {/* Números del countdown */}
-                            <div className="relative z-10 flex items-center justify-center space-x-2">
-                                {/* Días */}
-                                <div
-                                    className={`text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
-                                    style={{
-                                        textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
-                                        fontFamily: 'monospace'
-                                    }}>
-                                    {String(timeLeft.days).padStart(2, '0')}
-                                </div>
-
-                                {/* Separador : */}
-                                <div
-                                    className={`text-5xl font-mono font-bold ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
-                                    style={{
-                                        textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
-                                    }}>
-                                    :
-                                </div>
-
-                                {/* Horas */}
-                                <div
-                                    className={`text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
-                                    style={{
-                                        textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
-                                        fontFamily: 'monospace'
-                                    }}>
-                                    {String(timeLeft.hours).padStart(2, '0')}
-                                </div>
-
-                                {/* Separador : */}
-                                <div
-                                    className={`text-5xl font-mono font-bold ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
-                                    style={{
-                                        textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
-                                    }}>
-                                    :
-                                </div>
-
-                                {/* Minutos */}
-                                <div
-                                    className={`text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
-                                    style={{
-                                        textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
-                                        fontFamily: 'monospace'
-                                    }}>
-                                    {String(timeLeft.minutes).padStart(2, '0')}
-                                </div>
-
-                                {/* Separador : */}
-                                <div
-                                    className={`text-5xl font-mono font-bold ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
-                                    style={{
-                                        textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
-                                    }}>
-                                    :
-                                </div>
-
-                                {/* Segundos */}
-                                <div
-                                    className={`text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
-                                    style={{
-                                        textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
-                                        fontFamily: 'monospace'
-                                    }}>
-                                    {String(timeLeft.seconds).padStart(2, '0')}
-                                </div>
+                        {/* Números del countdown */}
+                        <div className="relative z-10 flex items-center justify-center space-x-2">
+                            {/* Días */}
+                            <div
+                                className={`time flex flex-col justify-center items-center text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
+                                style={{
+                                    textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
+                                    fontFamily: 'monospace'
+                                }}>
+                                {String(timeLeft.days).padStart(2, '0')}
+                                <span className="text-sm">{t('DAYS')}</span>
                             </div>
 
-                            {/* Líneas de escaneo */}
-                            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse"></div>
-                            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse"></div>
-                        </div>
-
-                        {/* Alerta de modo crítico */}
-                        {criticalMode && (
-                            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-red-900/80 px-4 py-1 rounded border border-red-500 animate-pulse">
-                                <div className="text-red-400 font-mono text-xs uppercase tracking-wide">⚠ CRITICAL MODE ⚠</div>
+                            {/* Separador : */}
+                            <div
+                                className={`text-5xl -mt-6 font-mono font-bold ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
+                                style={{
+                                    textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
+                                }}>
+                                :
                             </div>
-                        )}
-                    </div>
-                ) : (
-                    <div className="text-center">
-                        <div
-                            className="text-red-600 font-bold text-6xl font-mono animate-pulse mb-4"
-                            style={{
-                                textShadow: '0 0 30px rgba(255, 0, 0, 1)',
-                                fontFamily: 'monospace'
-                            }}>
-                            00:00:00:00
-                        </div>
-                        <div className="text-red-500 font-mono text-lg uppercase tracking-wider animate-pulse">⚠ JUDGMENT DAY INITIATED ⚠</div>
-                        <div className="text-yellow-400 font-mono text-sm mt-2">NUCLEAR DEPLOYMENT IN PROGRESS</div>
-                    </div>
-                )}
 
-                {/* Imágenes silonuclear debajo del contador */}
-                <div className="mt-6 space-y-4">
-                    <div className="flex flex-col items-center space-y-4">
-                        <img 
-                            src="/images/silonuclear1.jpg" 
-                            alt="Nuclear Silo 1" 
-                            className="w-full max-w-md h-auto rounded-lg border-2 border-red-500/50 shadow-lg shadow-red-500/20"
-                        />
-                        <img 
-                            src="/images/silonuclear2.jpg" 
-                            alt="Nuclear Silo 2" 
-                            className="w-full max-w-md h-auto rounded-lg border-2 border-red-500/50 shadow-lg shadow-red-500/20"
-                        />
+                            {/* Horas */}
+                            <div
+                                className={`time flex flex-col justify-center items-center text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
+                                style={{
+                                    textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
+                                    fontFamily: 'monospace'
+                                }}>
+                                {String(timeLeft.hours).padStart(2, '0')}
+                                <span className="text-sm">{t('HOURS')}</span>
+                            </div>
+
+                            {/* Separador : */}
+                            <div
+                                className={`text-5xl -mt-6 font-mono font-bold ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
+                                style={{
+                                    textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
+                                }}>
+                                :
+                            </div>
+
+                            {/* Minutos */}
+                            <div
+                                className={`time flex flex-col justify-center items-center text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
+                                style={{
+                                    textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
+                                    fontFamily: 'monospace'
+                                }}>
+                                {String(timeLeft.minutes).padStart(2, '0')}
+                                <span className="text-sm">{t('MINUTES')}</span>
+                            </div>
+
+                            {/* Separador : */}
+                            <div
+                                className={`text-5xl -mt-6 font-mono font-bold ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
+                                style={{
+                                    textShadow: '0 0 15px rgba(255, 0, 0, 0.6)'
+                                }}>
+                                :
+                            </div>
+
+                            {/* Segundos */}
+                            <div
+                                className={`time flex flex-col justify-center items-center text-5xl font-mono font-bold tracking-wider ${criticalMode ? 'text-red-400 animate-pulse' : 'text-red-500'}`}
+                                style={{
+                                    textShadow: '0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.4)',
+                                    fontFamily: 'monospace'
+                                }}>
+                                {String(timeLeft.seconds).padStart(2, '0')}
+                                <span className="text-sm">{t('SECONDS')}</span>
+                            </div>
+                        </div>
+
+                        {/* Líneas de escaneo */}
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse"></div>
+                        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent animate-pulse"></div>
                     </div>
+
+                    {/* Alerta de modo crítico */}
+                    {criticalMode && (
+                        <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-red-900/80 px-4 py-1 rounded border border-red-500 animate-pulse">
+                            <div className="text-red-400 font-mono text-xs uppercase tracking-wide">⚠ CRITICAL MODE ⚠</div>
+                        </div>
+                    )}
                 </div>
+            ) : (
+                <div className="text-center">
+                    <div
+                        className="text-red-600 font-bold text-6xl font-mono animate-pulse mb-4"
+                        style={{
+                            textShadow: '0 0 30px rgba(255, 0, 0, 1)',
+                            fontFamily: 'monospace'
+                        }}>
+                        00:00:00:00
+                    </div>
+                    <div className="text-red-500 font-mono text-lg uppercase tracking-wider animate-pulse">⚠ JUDGMENT DAY INITIATED ⚠</div>
+                    <div className="text-yellow-400 font-mono text-sm mt-2">NUCLEAR DEPLOYMENT IN PROGRESS</div>
+                </div>
+            )}
+
+            {/* Imágenes silonuclear debajo del contador */}
+            <div className="mt-6 space-y-4">
+                <div className="flex flex-col items-center space-y-4">
+                    <img src="/images/silonuclear1.jpg" alt="Nuclear Silo 1" className="w-full max-w-md h-auto rounded-lg border-2 border-red-500/50 shadow-lg shadow-red-500/20" />
+                    <img src="/images/silonuclear2.jpg" alt="Nuclear Silo 2" className="w-full max-w-md h-auto rounded-lg border-2 border-red-500/50 shadow-lg shadow-red-500/20" />
+                </div>
+            </div>
         </div>
     );
 };
