@@ -49,6 +49,11 @@ export const translations: Record<string, Record<string, string>> = {
         SURVEILLANCE_SYSTEM: 'Sistema de Vigilancia',
         JUDGMENT_DAY_COUNTDOWN: 'Tiempo para Día del Juicio Final',
         OPERATIONS_MAP: 'Mapa de Operaciones',
+
+        // Audio controls
+        AUDIO_ON: 'Audio activado',
+        AUDIO_OFF: 'Audio desactivado',
+
         COPYRIGHT_FOOTER: `SKYNET DEFENSE NETWORK © ${new Date().getFullYear()}-2029 CYBERDYNE SYSTEMS`
     },
     en: {
@@ -97,6 +102,11 @@ export const translations: Record<string, Record<string, string>> = {
         SURVEILLANCE_SYSTEM: 'Surveillance System',
         JUDGMENT_DAY_COUNTDOWN: 'Judgment Day Countdown',
         OPERATIONS_MAP: 'Operations Map',
+
+        // Audio controls
+        AUDIO_ON: 'Audio enabled',
+        AUDIO_OFF: 'Audio disabled',
+
         COPYRIGHT_FOOTER: `SKYNET DEFENSE NETWORK © ${new Date().getFullYear()}-2029 CYBERDYNE SYSTEMS`
     }
 };

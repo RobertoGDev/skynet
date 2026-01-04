@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { LanguageProvider } from './context/LanguageContext';
+import { AudioProvider } from './context/AudioContext';
 import { AuthProvider } from './components/AuthProvider';
-import LanguageSelector from './components/LanguageSelector';
 import 'leaflet/dist/leaflet.css';
 import './globals.css';
 
@@ -20,13 +20,7 @@ export default function RootLayout({
             <body suppressHydrationWarning={true} className="antialiased bg-black text-white">
                 <AuthProvider>
                     <LanguageProvider>
-                        <nav className="p-4 flex flex-col md:flex-row justify-between items-center">
-                            <h1 className="text-red-500 text-md font-bold">CYBERDINE SYSTEMS</h1>
-                            <div className="flex items-center space-x-4">
-                                <LanguageSelector />
-                            </div>
-                        </nav>
-                        {children}
+                        <AudioProvider>{children}</AudioProvider>
                     </LanguageProvider>
                 </AuthProvider>
             </body>
