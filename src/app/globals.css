@@ -37,7 +37,7 @@
 
 body {
   background: 
-    url('/dashboard-background.jpg'),
+    url('/images/dashboard-background.jpg'),
     radial-gradient(ellipse at center, rgba(0, 100, 200, 0.3) 0%, transparent 50%),
     radial-gradient(ellipse at 80% 20%, rgba(255, 0, 0, 0.2) 0%, transparent 50%),
     radial-gradient(ellipse at 20% 80%, rgba(0, 255, 255, 0.2) 0%, transparent 50%),
@@ -194,4 +194,30 @@ h1, h2, h3, h4, h5, h6 {
 .glow-green {
   box-shadow: 0 0 10px var(--skynet-green);
   border-color: var(--skynet-green);
+}
+
+/* Estilos mejorados para scroll del registro de eventos */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-track-gray-900\/50::-webkit-scrollbar-track {
+  background: rgba(17, 24, 39, 0.5);
+  border-radius: 4px;
+}
+
+.scrollbar-thumb-red-500\/70::-webkit-scrollbar-thumb {
+  background: rgba(239, 68, 68, 0.7);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.scrollbar-thumb-red-500\/70:hover::-webkit-scrollbar-thumb {
+  background: rgba(220, 38, 38, 0.8);
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+.scrollbar-corner-gray-900::-webkit-scrollbar-corner {
+  background: rgb(17, 24, 39);
 }
