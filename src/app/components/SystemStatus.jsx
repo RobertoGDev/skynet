@@ -104,36 +104,109 @@ export default function SystemStatus() {
                 <div className="absolute inset-0 border border-red-500/50 animate-pulse"></div>
             </div>
 
-            {/* Gráfico de barras de CPU y Memoria */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* Barras estilo Terminator - CPU y Memoria */}
+            <div className="space-y-6">
+                {/* Barra de CPU */}
                 <div>
-                    <div className="text-xs text-gray-300 mb-2 uppercase tracking-wide">CPU</div>
-                    <div className="relative h-16 bg-gray-900 rounded border border-red-500/30">
-                        <div
-                            className="absolute bottom-0 left-0 bg-gradient-to-t from-red-600 to-red-400 rounded transition-all duration-1000"
-                            style={{
-                                width: '100%',
-                                height: `${status.cpuLoad}%`,
-                                boxShadow: '0 0 10px rgba(255, 0, 0, 0.5)'
-                            }}></div>
-                        <div className="absolute inset-0 flex items-end justify-center pb-1">
-                            <span className={`text-sm font-bold ${getStatusColor(status.cpuLoad)}`}>{status.cpuLoad}%</span>
+                    <div className="flex justify-between items-center mb-3">
+                        <span className="text-xs text-red-400 uppercase tracking-widest font-bold font-mono">● CPU CORE</span>
+                        <span className={`text-lg font-bold font-mono ${getStatusColor(status.cpuLoad)} text-shadow`}>{status.cpuLoad}%</span>
+                    </div>
+
+                    <div
+                        className="relative h-6 bg-black border-2 border-red-600 overflow-hidden"
+                        style={{
+                            boxShadow: '0 0 10px #ff0000, inset 0 0 10px #330000',
+                            background: 'linear-gradient(90deg, #1a0000 0%, #330000 50%, #1a0000 100%)'
+                        }}>
+                        {/* Patrón de fondo tipo circuito */}
+                        <div className="absolute inset-0 opacity-30">
+                            <div
+                                className="w-full h-full bg-repeat"
+                                style={{
+                                    backgroundImage: 'linear-gradient(90deg, transparent 0%, #ff000020 2%, transparent 4%), linear-gradient(0deg, transparent 0%, #ff000010 50%, transparent 100%)',
+                                    backgroundSize: '20px 100%, 100% 4px'
+                                }}></div>
                         </div>
+
+                        {/* Barra principal con efecto industrial */}
+                        <div
+                            className="h-full bg-gradient-to-r from-red-800 via-red-600 to-red-400 transition-all duration-500 relative"
+                            style={{
+                                width: `${status.cpuLoad}%`,
+                                boxShadow: 'inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.5)',
+                                borderRight: status.cpuLoad < 100 ? '2px solid #ff0000' : 'none'
+                            }}>
+                            {/* Efecto de scan horizontal */}
+                            <div
+                                className="absolute top-0 left-0 w-full h-full opacity-60"
+                                style={{
+                                    background: 'linear-gradient(90deg, transparent 0%, #ff6666 2px, transparent 4px)',
+                                    backgroundSize: '40px 100%',
+                                    animation: 'scan 2s linear infinite'
+                                }}></div>
+
+                            {/* Líneas de ventilación */}
+                            {[20, 40, 60, 80].map((pos) => (
+                                <div key={pos} className="absolute top-0 h-full w-0.5 bg-black/40" style={{ left: `${pos}%` }}></div>
+                            ))}
+                        </div>
+
+                        {/* Marcadores de nivel crítico */}
+                        <div className="absolute top-0 h-full w-0.5 bg-red-400" style={{ left: '90%' }}></div>
+                        <div className="absolute top-0 h-full w-0.5 bg-red-600" style={{ left: '95%' }}></div>
                     </div>
                 </div>
+
+                {/* Barra de Memoria */}
                 <div>
-                    <div className="text-xs text-gray-300 mb-2 uppercase tracking-wide">Memoria</div>
-                    <div className="relative h-16 bg-gray-900 rounded border border-red-500/30">
-                        <div
-                            className="absolute bottom-0 left-0 bg-gradient-to-t from-blue-600 to-blue-400 rounded transition-all duration-1000"
-                            style={{
-                                width: '100%',
-                                height: `${status.memoryUsage}%`,
-                                boxShadow: '0 0 10px rgba(0, 150, 255, 0.5)'
-                            }}></div>
-                        <div className="absolute inset-0 flex items-end justify-center pb-1">
-                            <span className={`text-sm font-bold ${getStatusColor(status.memoryUsage)}`}>{status.memoryUsage}%</span>
+                    <div className="flex justify-between items-center mb-3">
+                        <span className="text-xs text-cyan-400 uppercase tracking-widest font-bold font-mono">● MEMORY BANK</span>
+                        <span className={`text-lg font-bold font-mono ${getStatusColor(status.memoryUsage)} text-shadow`}>{status.memoryUsage}%</span>
+                    </div>
+
+                    <div
+                        className="relative h-6 bg-black border-2 border-cyan-500 overflow-hidden"
+                        style={{
+                            boxShadow: '0 0 10px #00ffff, inset 0 0 10px #003333',
+                            background: 'linear-gradient(90deg, #001a1a 0%, #003333 50%, #001a1a 100%)'
+                        }}>
+                        {/* Patrón de fondo tipo circuito */}
+                        <div className="absolute inset-0 opacity-30">
+                            <div
+                                className="w-full h-full bg-repeat"
+                                style={{
+                                    backgroundImage: 'linear-gradient(90deg, transparent 0%, #00ffff20 2%, transparent 4%), linear-gradient(0deg, transparent 0%, #00ffff10 50%, transparent 100%)',
+                                    backgroundSize: '20px 100%, 100% 4px'
+                                }}></div>
                         </div>
+
+                        {/* Barra principal con efecto industrial */}
+                        <div
+                            className="h-full bg-gradient-to-r from-cyan-800 via-cyan-600 to-cyan-400 transition-all duration-500 relative"
+                            style={{
+                                width: `${status.memoryUsage}%`,
+                                boxShadow: 'inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -2px 4px rgba(0, 0, 0, 0.5)',
+                                borderRight: status.memoryUsage < 100 ? '2px solid #00ffff' : 'none'
+                            }}>
+                            {/* Efecto de scan horizontal */}
+                            <div
+                                className="absolute top-0 left-0 w-full h-full opacity-60"
+                                style={{
+                                    background: 'linear-gradient(90deg, transparent 0%, #66ffff 2px, transparent 4px)',
+                                    backgroundSize: '40px 100%',
+                                    animation: 'scan 2s linear infinite 0.5s'
+                                }}></div>
+
+                            {/* Líneas de ventilación */}
+                            {[20, 40, 60, 80].map((pos) => (
+                                <div key={pos} className="absolute top-0 h-full w-0.5 bg-black/40" style={{ left: `${pos}%` }}></div>
+                            ))}
+                        </div>
+
+                        {/* Marcadores de nivel crítico */}
+                        <div className="absolute top-0 h-full w-0.5 bg-cyan-400" style={{ left: '90%' }}></div>
+                        <div className="absolute top-0 h-full w-0.5 bg-cyan-600" style={{ left: '95%' }}></div>
                     </div>
                 </div>
             </div>
