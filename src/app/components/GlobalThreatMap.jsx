@@ -182,7 +182,7 @@ function GlobalThreatMap({ userLocation }) {
                 )}
 
                 {/* Overlay de HUD */}
-                <div className="absolute top-2 left-2 z-[1000] bg-black/80 p-2 rounded border border-red-500/50 font-mono text-xs">
+                <div className="absolute top-2 left-2 z-[1000] bg-black/80 p-2 rounded border border-red-500/50 font-mono text-[9px]">
                     <div className="text-red-400 mb-1">{t('GLOBAL_SURVEILLANCE_NETWORK')}</div>
                     <div className="text-green-400">
                         {t('THREATS_DETECTED')}: {threats.length}
@@ -194,19 +194,19 @@ function GlobalThreatMap({ userLocation }) {
 
                 {/* Indicadores de amenaza */}
                 <div className="absolute top-2 right-2 z-[1000] space-y-1">
-                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-red-500/30 text-xs font-mono">
+                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-red-500/30 text-[9px] font-mono">
                         <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                         <span className="text-red-400">{t('CRITICAL')}</span>
                     </div>
-                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-orange-500/30 text-xs font-mono">
+                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-orange-500/30 text-[9px] font-mono">
                         <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
                         <span className="text-orange-400">{t('HIGH')}</span>
                     </div>
-                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-yellow-500/30 text-xs font-mono">
+                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-yellow-500/30 text-[9px] font-mono">
                         <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
                         <span className="text-yellow-400">{t('MEDIUM')}</span>
                     </div>
-                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-green-500/30 text-xs font-mono">
+                    <div className="flex items-center space-x-2 bg-black/80 p-1 rounded border border-green-500/30 text-[9px] font-mono">
                         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                         <span className="text-green-400">{t('LOW')}</span>
                     </div>
