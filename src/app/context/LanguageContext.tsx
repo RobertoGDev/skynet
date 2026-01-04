@@ -25,7 +25,6 @@ export const translations: Record<string, Record<string, string>> = {
         SECURITY_PROTOCOLS: 'PROTOCOLOS DE SEGURIDAD',
         ONLINE: 'ONLINE',
         INITIALIZING: 'INICIALIZANDO',
-        ACTIVE: 'ACTIVOS',
         SECURE_ACCESS_TERMINAL: 'TERMINAL DE ACCESO SEGURO',
         TECH_COM_ID: 'IDENTIFICADOR TECH-COM:',
         ACCESS_CODE: 'CÓDIGO DE ACCESO:',
@@ -84,7 +83,6 @@ export const translations: Record<string, Record<string, string>> = {
         MEDIUM: 'MEDIO',
         HIGH: 'ALTO',
         ELEVATED: 'ELEVADO',
-        ACTIVE_STATUS: 'ACTIVO',
         INACTIVE: 'INACTIVO',
 
         // Event Messages
@@ -116,11 +114,9 @@ export const translations: Record<string, Record<string, string>> = {
         SURVEILLANCE_GRID: 'CUADRÍCULA DE VIGILANCIA',
         CAMERA: 'CÁMARA',
         NO_SIGNAL: 'SIN SEÑAL',
-        LOADING: 'CARGANDO',
         CONNECTING: 'CONECTANDO',
         OFFLINE: 'DESCONECTADA',
         ONLINE_STATUS: 'EN LÍNEA',
-        LOCATION: 'UBICACIÓN',
 
         // Error Messages
         CONNECTION_ERROR: 'Error de conexión con el servidor de autenticación',
@@ -183,7 +179,6 @@ export const translations: Record<string, Record<string, string>> = {
         SECURITY_PROTOCOLS: 'SECURITY PROTOCOLS',
         ONLINE: 'ONLINE',
         INITIALIZING: 'INITIALIZING',
-        ACTIVE: 'ACTIVE',
         SECURE_ACCESS_TERMINAL: 'SECURE ACCESS TERMINAL',
         TECH_COM_ID: 'TECH-COM ID:',
         ACCESS_CODE: 'ACCESS CODE:',
@@ -242,7 +237,6 @@ export const translations: Record<string, Record<string, string>> = {
         MEDIUM: 'MEDIUM',
         HIGH: 'HIGH',
         ELEVATED: 'ELEVATED',
-        ACTIVE_STATUS: 'ACTIVE',
         INACTIVE: 'INACTIVE',
 
         // Event Messages
@@ -274,11 +268,9 @@ export const translations: Record<string, Record<string, string>> = {
         SURVEILLANCE_GRID: 'SURVEILLANCE GRID',
         CAMERA: 'CAMERA',
         NO_SIGNAL: 'NO SIGNAL',
-        LOADING: 'LOADING',
         CONNECTING: 'CONNECTING',
         OFFLINE: 'OFFLINE',
         ONLINE_STATUS: 'ONLINE',
-        LOCATION: 'LOCATION',
 
         // Error Messages
         CONNECTION_ERROR: 'Authentication server connection error',
